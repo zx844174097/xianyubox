@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<函数>
+	<explanation>里面有非常好用的[name]</explanation>
+    <鼠标函数>
+    	<explanation>里面有非常好用的[name]</explanation>
+        <鼠标按下>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mousePress</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1&lt;br&gt;&lt;br&gt;参数1: 鼠标的虚拟键值码</explanation>
+            <parameters>[3]</parameters>
+        </鼠标按下>
+        <鼠标释放>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mouseRelease</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1&lt;br&gt;&lt;br&gt;参数1: 鼠标的虚拟键值码</explanation>
+            <parameters>[3]</parameters>
+        </鼠标释放>
+        <鼠标滑轮滚动>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mouseWheel</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1&lt;br&gt;&lt;br&gt;参数1: 小于0 则滚轮向上 反之向下,参数1大小决定滚轮滑动幅度</explanation>
+            <parameters>[0]</parameters>
+        </鼠标滑轮滚动>
+        <鼠标单击1次>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mousePressOne</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 参数2&lt;br&gt;&lt;br&gt;参数1：鼠标的虚拟键值码&lt;br&gt;参数2：鼠标按下与释放之间的间隔，可不填写</explanation>
+            <parameters>[3, 0]</parameters>
+        </鼠标单击1次>
+        <鼠标移动>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mouseMove</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 参数2&lt;br&gt;&lt;br&gt;参数1：屏幕x位置&lt;br&gt;参数2：屏幕y位置</explanation>
+            <parameters>[0, 0]</parameters>
+        </鼠标移动>
+        <鼠标移动并单击1次>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>mouseMovePressOne</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 参数2 参数3&lt;br&gt;&lt;br&gt;参数1：屏幕x位置&lt;br&gt;参数2：屏幕y位置&lt;br&gt;参数3：鼠标的虚拟键值码</explanation>
+            <parameters>[0, 0, 3]</parameters>
+        </鼠标移动并单击1次>
+    </鼠标函数>
+    <键盘函数>
+    	<explanation>里面有非常好用的[name]</explanation>
+        <按下某个键>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>keyPress</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 &lt;br&gt;&lt;br&gt;参数1：键盘的虚拟键值码</explanation>
+            <parameters>[2]</parameters>
+        </按下某个键>
+        <释放某个键>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>keyRelease</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 &lt;br&gt;&lt;br&gt;参数1：键盘的虚拟键值码</explanation>
+            <parameters>[2]</parameters>
+        </释放某个键>
+        <键盘单击1次>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>keyPressOne</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 参数2&lt;br&gt;&lt;br&gt;参数1：键盘的虚拟键值码&lt;br&gt;参数2：键盘按下与释放之间的间隔，可不填写</explanation>
+            <parameters>[2, 0]</parameters>
+        </键盘单击1次>
+    </键盘函数>
+    <其他函数>
+    	<explanation>里面有非常好用的[name]</explanation>
+        <延迟函数>
+            <class_name>com.mugui.windows.Tool</class_name>
+            <function>delay</function>
+            <explanation>使用方法：&lt;br&gt; [name] 参数1 &lt;br&gt;&lt;br&gt;参数1：延迟时间</explanation>
+            <parameters>[0]</parameters>
+        </延迟函数>
+    </其他函数>
+</函数>

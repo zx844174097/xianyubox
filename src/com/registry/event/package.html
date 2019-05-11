@@ -1,0 +1,16 @@
+<html>
+<body>
+Contains all of the classes and interfaces necessary for registering for and receiving events
+fired by the Windows Registry. See {@link com.registry.RegistryWatcher} for more details.
+<p>
+{@link com.registry.event.RegistryListener} is the interface used to receive change events
+from the Windows Registry. Classes that implement the {@code RegistryListener} interface register with the
+class {@code RegistryWatcher} to receive events.
+<p>
+{@link com.registry.event.RegistryEvent} provides a limited insight into which registry key changed
+or the root of a registry subtree from which a registry key changed. Which ever key is reported to have changed
+depends on how a listener has been registered.
+
+@since JRegistry 1.0
+</body>
+</html>
