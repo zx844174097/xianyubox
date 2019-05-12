@@ -1,4 +1,0 @@
-#\u9ED8\u8BA4\u670D\u52A1\u5668ip\u5730\u5740
-#Fri Feb 22 12:41:58 CST 2019
-server_post=6543
-server_host=47.107.90.43

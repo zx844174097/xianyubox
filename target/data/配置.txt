@@ -1,6 +1,0 @@
-100,0,2000,500,0.15,200,400,400,0.10,500,0,200,0.15,200,150,0.10,100,3500,1,1000,1500,1500,1000,0.1,280
-true,false,false,false,true,true,false,true,false,true,mugui1,false,false,true,ZGY3ZjZiODViNDc4YmE4ZTBlOWM3NWNjMWVkODIyYmI=,false,false,false,false,false,false,false,true,false,true,true,true,true,false,true,false,false
-200,0,200,200,100,200,0,1500,0
-0,<무역 관리> 바하르,<무역 관리> 시우타,
-:D;:;:;:;:;:;:;:;
-false;50;0-0;0.15
