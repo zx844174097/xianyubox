@@ -35,7 +35,6 @@ import com.mugui.script.DataSave;
 import com.mugui.script.FunctionBean;
 import com.mugui.script.FunctionBean.FunctionParameter;
 
-import cern.colt.Arrays;
 
 public class FunctionTree extends JTree {
 	/**

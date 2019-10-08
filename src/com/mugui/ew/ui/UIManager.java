@@ -32,4 +32,5 @@ public class UIManager extends com.mugui.manager.DefaultUIManager {
 		}
 		return panel;
 	}
+	
 }

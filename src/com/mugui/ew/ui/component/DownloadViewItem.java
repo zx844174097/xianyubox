@@ -1,25 +1,24 @@
 package com.mugui.ew.ui.component;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+import com.mugui.Dui.DButton;
+import com.mugui.Dui.DOptionPanel;
 import com.mugui.Dui.DPanel;
 import com.teamdev.jxbrowser.chromium.DownloadItem;
 import com.teamdev.jxbrowser.chromium.events.DownloadEvent;
 import com.teamdev.jxbrowser.chromium.events.DownloadListener;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Desktop;
-
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import com.mugui.Dui.DButton;
-import com.mugui.Dui.DOptionPanel;
-
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.awt.event.ActionEvent;
 
 public class DownloadViewItem extends DPanel {
 
@@ -142,6 +141,8 @@ public class DownloadViewItem extends DPanel {
 						progressBar.setString("未知大小");
 					} else
 						progressBar.setValue(i);
+					progressBar.invalidate();
+					progressBar.updateUI();
 				}
 			}
 		});

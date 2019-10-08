@@ -106,7 +106,7 @@ public class BrowserModel implements ModelInterface {
 	private Browser baidu = null;
 	private Browser bilibili = null;
 	private Browser hacg = null;
-	//private Browser btdb = null;
+	// private Browser btdb = null;
 	private Browser btstation = null;
 	// private Browser iwara = null;
 	private Browser[] serachs = null;
@@ -196,10 +196,13 @@ public class BrowserModel implements ModelInterface {
 	}
 
 	private void resolverBili(DOMDocument document) {
-
-		DOMElement domElement = document.findElement(By.className("result-wrap clearfix"));
-		if (domElement == null)
+		DOMElement domElement = document.findElement(By.className("video-list clearfix"));
+		if (domElement == null) {
+			domElement = document.findElement(By.className("result-wrap clearfix"));
+		}
+		if (domElement == null) {
 			return;
+		}
 		List<DOMElement> list = domElement.findElements(By.tagName("a"));
 		for (DOMElement element : list) {
 			Object object = resolveBiliItem(element);
@@ -218,7 +221,8 @@ public class BrowserModel implements ModelInterface {
 		bean.setUrl(item.getAttribute("href"));
 		bean.setTitle(item.getAttribute("title"));
 		String xpath = item.getParent().getXPath();
-		bean.setDetail(item.getParent().findElement(By.xpath(xpath + "/div/div[2]")).getInnerText() + "<br>" + "哔哩哔哩视频：" + item.getInnerText());
+		bean.setDetail(item.getParent().findElement(By.xpath(xpath + "/div/div[2]")).getInnerText() + "<br>" + "哔哩哔哩视频："
+				+ item.getInnerText());
 
 		if (bean.getUrl() == null || bean.getUrl().trim().equals(""))
 			return null;
@@ -337,7 +341,7 @@ public class BrowserModel implements ModelInterface {
 		baidu = new Browser();
 		bilibili = new Browser();
 		hacg = new Browser();
-		//btdb = new Browser();
+		// btdb = new Browser();
 		// acg18 = new Browser();
 		// iwara = new Browser();
 		btstation = new Browser();
@@ -382,15 +386,15 @@ public class BrowserModel implements ModelInterface {
 		}
 
 		bilibili.loadURL("https://search.bilibili.com/all?keyword=" + text);
-		hacg.loadURL("https://www.liuli.in/wp/?s=" + text + "&submit=搜索");
-		//btdb.loadURL("https://btdb.to/q/" + text + "/");
+		hacg.loadURL("https://www.liuli.be/wp/?s=" + text + "&submit=搜索");
+		// btdb.loadURL("https://btdb.to/q/" + text + "/");
 		// iwara.loadURL("https://ecchi.iwara.tv/search?query=" + text);
 		baidu.loadURL("https://www.baidu.com/s?wd=" + text);
-		btstation.loadURL("https://btstation.com/search/all/" + text + "/0");
+//		btstation.loadURL("https://www.cilimao.world/search?word=" + text + "&page=1");
 	}
 
 	public Object resolveHtml(Browser browser) {
-		if (browser.getURL().indexOf(MuguiBrowser.LIULI)!=-1) {
+		if (browser.getURL().indexOf(MuguiBrowser.LIULI) != -1) {
 			return resolveLiuliHtml(browser);
 		} else {
 			return resolveOtherHtml(browser);
@@ -450,7 +454,8 @@ public class BrowserModel implements ModelInterface {
 			int start = matcher_Pan.start();
 			int end = matcher_Pan.end();
 			char c = 0;
-			while (end < body.length && ((c = body[end]) <= '9' && c >= '0') || (c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A')) {
+			while (end < body.length && ((c = body[end]) <= '9' && c >= '0') || (c <= 'z' && c >= 'a')
+					|| (c <= 'Z' && c >= 'A')) {
 				end++;
 			}
 			end++;
@@ -479,7 +484,8 @@ public class BrowserModel implements ModelInterface {
 
 	public void downloadRes(LinkedList<String> linkedList) {
 		if (linkedList.size() > 10) {
-			int i = DOptionPanel.showMessageDialog(dataSave.frame, "发现的资源连接较多，可能都是无法下载的虚假资源,是否继续下载", "提示", DOptionPanel.OPTION_OK_CANCEL);
+			int i = DOptionPanel.showMessageDialog(dataSave.frame, "发现的资源连接较多，可能都是无法下载的虚假资源,是否继续下载", "提示",
+					DOptionPanel.OPTION_OK_CANCEL);
 			if (i != DOptionPanel.RET_YES) {
 				return;
 			}

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -164,6 +165,7 @@ public class NetworkCheckModel implements ModelInterface, NetworkDelegate {
 	}
 
 	private void RUN() {
+		Thread.currentThread().setName(NetworkCheckModel.class.getName());
 		while (isrun()) {
 			Other.sleep(3000);
 			if (list.isEmpty())
@@ -184,7 +186,7 @@ public class NetworkCheckModel implements ModelInterface, NetworkDelegate {
 						if (dou == 100.00d) {
 							entry.getValue().end();
 							iterator.remove();
-							return;
+							continue;
 						}
 						((DDownloadItem) entry.getValue().item).setPercentComplete((int) dou);
 						value = entry.getValue().item.getBrowser().executeJavaScriptAndReturnValue("player_placeholder.jwGetDuration()");
@@ -218,7 +220,7 @@ public class NetworkCheckModel implements ModelInterface, NetworkDelegate {
 		if (isrun())
 			return;
 		init();
-		mainThread.start();
+		mainThread.start();	
 
 	}
 
@@ -235,7 +237,7 @@ public class NetworkCheckModel implements ModelInterface, NetworkDelegate {
 		try {
 			synchronized (key) {
 				isTrue = false;
-				key.wait();
+				key.wait(5000);
 			}
 		} catch (Exception e) {
 		}

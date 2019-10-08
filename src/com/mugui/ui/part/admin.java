@@ -500,7 +500,7 @@ public class admin extends DPanel {
 	}
 
 	private boolean isZhang() {
-		File f = new File(FileTool.getWindowsPath() + "\\1");
+		File f = new File(FileTool.getWindowsPath() + "\\1.txt");
 		BufferedReader br = null;
 		try {
 			if (!f.exists())
@@ -531,7 +531,8 @@ public class admin extends DPanel {
 	}
 
 	public void saveZhanghao(String mail) {
-		File f = new File(FileTool.getWindowsPath() + "\\1");
+		File f = new File(FileTool.getWindowsPath() + "\\1.txt");
+		System.out.println(f.getAbsolutePath());
 		BufferedWriter br = null;
 		try {
 			if (!f.exists())

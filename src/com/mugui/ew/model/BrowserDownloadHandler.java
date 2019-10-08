@@ -18,7 +18,7 @@ public class BrowserDownloadHandler implements ModelInterface, DownloadHandler {
 		downloadSelector.init();
 		downloadView = EWUIHandel.datasave.getUIManager().get("com.mugui.ew.ui.component.DownloadView");
 		downloadView.dataInit();
-	}
+	} 
 
 	@Override
 	public void start() {

@@ -66,6 +66,7 @@ public class MAIN {
 
 			Method addUrl = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
 			addUrl.setAccessible(true);
+			System.out.println(new File(DataSave.JARFILEPATH + "\\lib\\").getAbsolutePath());
 			File[] files = new File(DataSave.JARFILEPATH + "\\lib\\").listFiles();
 			for (File file : files) {
 				// String end =
@@ -123,9 +124,9 @@ public class MAIN {
 			}
 		});
 
-		 init();
-		 System.setOut(outputStream);
-		 System.setErr(outputStream);
+//		 init();
+//		 System.setOut(outputStream);
+//		 System.setErr(outputStream);
 		System.setOut(new PrintStream(System.out) {
 			@SuppressWarnings("deprecation")
 			@Override
