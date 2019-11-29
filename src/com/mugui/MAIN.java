@@ -1,6 +1,5 @@
 package com.mugui;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,18 +21,18 @@ import java.util.Date;
 
 import com.mugui.model.CmdModel;
 import com.mugui.model.HsAllModel;
-import com.mugui.tool.ImgTool;
 import com.mugui.tool.Other;
 import com.mugui.ui.DataSave;
-import com.mugui.windows.Tool;
 
 public class MAIN {
 	protected static final String UI_MANAGER[] = null;
+
+	private static  String JARFILEPATH = null;
 	static {
 		System.setProperty("sun.jnu.encoding", "utf-8");
-		DataSave.JARFILEPATH = MAIN.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+		JARFILEPATH = MAIN.class.getProtectionDomain().getCodeSource().getLocation().getFile();
 		try {
-			DataSave.JARFILEPATH = URLDecoder.decode(new File(DataSave.JARFILEPATH).getParent(), "utf-8");
+			JARFILEPATH = URLDecoder.decode(new File(JARFILEPATH).getParent(), "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -48,13 +47,13 @@ public class MAIN {
 					continue;
 				}
 				InputStream inputStream = classLoader.getResourceAsStream("com/mugui/updatafile/" + line[0]);
-				File outfile = new File(DataSave.JARFILEPATH + line[1]);
+				File outfile = new File(JARFILEPATH + line[1]);
 				if (!outfile.isDirectory()) {
 					continue;
 				}
-				System.out.println(DataSave.JARFILEPATH + line[1] + line[0]);
+				System.out.println(JARFILEPATH + line[1] + line[0]);
 
-				FileOutputStream outputStream = new FileOutputStream(DataSave.JARFILEPATH + line[1] + line[0]);
+				FileOutputStream outputStream = new FileOutputStream(JARFILEPATH + line[1] + line[0]);
 				byte[] b = new byte[1024];
 				int len = 0;
 				while ((len = inputStream.read(b)) > 0) {
@@ -66,8 +65,8 @@ public class MAIN {
 
 			Method addUrl = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
 			addUrl.setAccessible(true);
-			System.out.println(new File(DataSave.JARFILEPATH + "\\lib\\").getAbsolutePath());
-			File[] files = new File(DataSave.JARFILEPATH + "\\lib\\").listFiles();
+			System.out.println(new File(JARFILEPATH + "\\lib\\").getAbsolutePath());
+			File[] files = new File(JARFILEPATH + "\\lib\\").listFiles();
 			for (File file : files) {
 				// String end =
 				// file.getName().substring(file.getName().lastIndexOf(".") +
@@ -79,7 +78,7 @@ public class MAIN {
 				addUrl.invoke(classLoader, file.toURI().toURL());
 			}
 			addUrl.setAccessible(false);
-
+			DataSave.JARFILEPATH = JARFILEPATH;
 		} catch (NoSuchMethodException e1) {
 			e1.printStackTrace();
 		} catch (SecurityException e1) {

@@ -150,9 +150,13 @@ public class JGHandle {
 					number++;
 					continue;
 				}
-				if (DataSave.JGNP) {
+				if (!DataSave.jg.isSafeJG() && DataSave.JGNP) {
 					// 1259 715 1393,y=185
-					tool.mouseMovePressOne(bb_xy.x - 134 - 180, bb_xy.y + 565, InputEvent.BUTTON1_MASK);
+					if (DataSave.服务器.equals("私服")) {
+						tool.mouseMovePressOne(bb_xy.x - 134 - 180, bb_xy.y + 565, InputEvent.BUTTON1_MASK);
+					} else {// 1311 890 1409 168
+						tool.mouseMovePressOne(bb_xy.x - 98, bb_xy.y + 782, InputEvent.BUTTON1_MASK);
+					}
 					tool.delay(2000);
 				} else {
 					readyJG();
@@ -361,7 +365,8 @@ public class JGHandle {
 					}
 					state = 0;
 				}
-				tool.mouseMovePressOne(x1 + (bean.getColumn() - 1) * 54 + 5, y1 + (bean.getRow() - 1) % 8 * 54 + 5, InputEvent.BUTTON3_MASK);
+				tool.mouseMovePressOne(x1 + (bean.getColumn() - 1) * 54 + 5, y1 + (bean.getRow() - 1) % 8 * 54 + 5,
+						InputEvent.BUTTON3_MASK);
 				tool.delay(500);
 				byte[] b = DataSave.jg.getJGGS().trim().getBytes(Charset.forName("UTF-8"));
 				for (int i = 0; i < b.length; i++) {
@@ -437,17 +442,26 @@ public class JGHandle {
 			if (DataSave.JGNP) {
 				tool.delay(500);
 				if (npcheck_point == null) {
-					npcheck_point = GameUIModel.FindXX2(tool, (int) (DataSave.SCREEN_WIDTH / 2) + 500 + DataSave.SCREEN_X, DataSave.SCREEN_Y + 80,
+					npcheck_point = GameUIModel.FindXX2(tool,
+							(int) (DataSave.SCREEN_WIDTH / 2) + 500 + DataSave.SCREEN_X, DataSave.SCREEN_Y + 80,
 							DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2);
 				}
 				if (npcheck_point == null) {
-					npcheck_point = GameUIModel.FindXX(tool, (int) (DataSave.SCREEN_WIDTH / 2) + 500 + DataSave.SCREEN_X, DataSave.SCREEN_Y + 80,
+					npcheck_point = GameUIModel.FindXX(tool,
+							(int) (DataSave.SCREEN_WIDTH / 2) + 500 + DataSave.SCREEN_X, DataSave.SCREEN_Y + 80,
+							DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2);
+				}
+				if (npcheck_point == null) {
+					npcheck_point = GameUIModel.Findjgbb4(tool,
+							(int) (DataSave.SCREEN_WIDTH / 2) + 500 + DataSave.SCREEN_X, DataSave.SCREEN_Y + 80,
 							DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2);
 				}
 				System.out.println("npcheck_point:" + npcheck_point);
 				if (npcheck_point == null) {
-					npcheck_point = new Point(DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 223, SCREEN_LOCTION.y + SCREEN_SIZE.height / 2 - 322);
+					npcheck_point = new Point(DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 223,
+							SCREEN_LOCTION.y + SCREEN_SIZE.height / 2 - 322);
 				} // 1697 217
+
 				pp1 = new Point(npcheck_point.x + 14, npcheck_point.y + 145);
 				tool.mouseMovePressOne(pp1.x, pp1.y, InputEvent.BUTTON1_MASK);
 				tool.delay(500);
@@ -473,9 +487,10 @@ public class JGHandle {
 						state = 0;
 					}
 
-					int x = npcheck_point.x - 397;
+					int x = npcheck_point.x - 397 - 54;
 					int y = npcheck_point.y + 89;
-					tool.mouseMovePressOne((bean.getColumn() - 1) * 54 + x + 5, (bean.getRow() - 1) % 8 * 54 + y + 5, InputEvent.BUTTON3_MASK);
+					tool.mouseMovePressOne((bean.getColumn() - 1) * 54 + x + 5, (bean.getRow() - 1) % 8 * 54 + y + 5,
+							InputEvent.BUTTON3_MASK);
 
 				} else {
 					// if (DataSave.SCREEN_WIDTH <= 1440) {
@@ -535,6 +550,7 @@ public class JGHandle {
 						int z = y1 + ((bean.getRow() - 1) % 8) * 54;
 						BufferedImage bufferedImage = tool.截取屏幕(w - 2, z - 4, w + 22, z + 4);
 						bean.setImage(bufferedImage);
+						tool.保存图片(bufferedImage, bean.getColumn() + "." + bean.getRow() + ".bmp");
 					}
 				}
 			}
@@ -544,10 +560,20 @@ public class JGHandle {
 			long time = System.currentTimeMillis();
 			Point point = null;
 			while (isTrue) {
-				if (!DataSave.jg.isSafeJG()) {
 
-					point = GameUIModel.Findjgbb3(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2, DataSave.SCREEN_Y,
-							DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 400, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 150);
+				if (!DataSave.jg.isSafeJG()) {
+					point = GameUIModel.Findjgbb4(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+							DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 400,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 150);
+					if (point != null) {
+						point.x -= 13;
+						point.y -= 40;
+						break;
+					}
+					System.out.println("point:" + point);
+					point = GameUIModel.Findjgbb3(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+							DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 400,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 150);
 					if (point != null) {
 						point.x -= 13;
 						point.y -= 40;
@@ -555,24 +581,35 @@ public class JGHandle {
 					}
 					// 1393 144
 					System.out.println("point:" + point);
-					point = GameUIModel.FindXX(tool, SCREEN_LOCTION.x + SCREEN_SIZE.width / 2, SCREEN_LOCTION.y, SCREEN_LOCTION.x + SCREEN_SIZE.width - 400,
-							SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
+					point = GameUIModel.FindXX(tool, SCREEN_LOCTION.x + SCREEN_SIZE.width / 2, SCREEN_LOCTION.y,
+							SCREEN_LOCTION.x + SCREEN_SIZE.width - 400, SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
 					if (point != null) {
 						point.x -= 13;
 						point.y -= 40;
 						break;
 					}
 				} else {
-					point = GameUIModel.Findjgbb3(tool, SCREEN_LOCTION.x + 100, SCREEN_LOCTION.y + 50, SCREEN_LOCTION.x + SCREEN_SIZE.width / 2,
-							SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
+//					tool.保存截屏(DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2, DataSave.SCREEN_Y,
+//							DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 400,
+//							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 150, "sala.bmp");
+					point = GameUIModel.FindjgbbSafe(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+							DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 400,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 150);
+					if (point != null) {
+						point.x -= 13;
+						point.y -= 40 - 10;
+						break;
+					}
+					point = GameUIModel.Findjgbb3(tool, SCREEN_LOCTION.x + 100, SCREEN_LOCTION.y + 50,
+							SCREEN_LOCTION.x + SCREEN_SIZE.width / 2, SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
 					if (point != null) {
 						point.x -= 13;
 						point.y -= 40;
 						break;
 					}
 					System.out.println("point2:" + point);
-					point = GameUIModel.FindXX(tool, SCREEN_LOCTION.x + 100, SCREEN_LOCTION.y + 50, SCREEN_LOCTION.x + SCREEN_SIZE.width / 2,
-							SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
+					point = GameUIModel.FindXX(tool, SCREEN_LOCTION.x + 100, SCREEN_LOCTION.y + 50,
+							SCREEN_LOCTION.x + SCREEN_SIZE.width / 2, SCREEN_LOCTION.y + SCREEN_SIZE.height / 2);
 					if (point != null) {
 						point.x -= 13;
 						point.y -= 40;
@@ -585,8 +622,10 @@ public class JGHandle {
 					if (DataSave.jg.isSafeJG())
 						openSafe();
 					else {
-						Point p = tool.区域找图EX(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176, SCREEN_LOCTION.y + SCREEN_SIZE.height - 250,
-								SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 136, SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, 0.07, "仓库.bmp");
+						Point p = tool.区域找图EX(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176,
+								SCREEN_LOCTION.y + SCREEN_SIZE.height - 250,
+								SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 136,
+								SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, 0.07, "仓库.bmp");
 						if (p != null) {
 							tool.mouseMovePressOne(p.x + 5, p.y + 5, InputEvent.BUTTON1_MASK);
 						} else {
@@ -609,15 +648,18 @@ public class JGHandle {
 			// tool.保存截屏(DataSave.SCREEN_X + 600, DataSave.SCREEN_Y + 112,
 			// DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 200,
 			// DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2, "Lin2.bmp");
-			while (model_point == null && isTrue && (model_point = GameUIModel.FindXX2(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
-					DataSave.SCREEN_Y + 100, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 400, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 100)) == null) {
+			while (model_point == null && isTrue
+					&& (model_point = GameUIModel.Findjgbb3(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+							DataSave.SCREEN_Y + 100, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 400,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 100)) == null) {
 				tool.delay(500);
 			}
 			if (model_point == null)
 				return;
-			// 1135 175 749 563
+			System.out.println("model_point:" + model_point);
+			// 1156 219 772 614
 			int x = model_point.x - 386;
-			int y = model_point.y + 385;
+			int y = DataSave.服务器.equals("私服") ? model_point.y + 385 : model_point.y + 395;
 			int w = 62;
 			int h = 62;
 			String model = jgOtherPanel[number].getJGModel();
@@ -642,27 +684,12 @@ public class JGHandle {
 
 			if (DataSave.jg.isJGStone()) {
 				tool.mouseMovePressOne(model_point.x - 206 + 143, model_point.y + 618, InputEvent.BUTTON1_MASK);
-
-			} else {
-				// 987 768 1043 826
-				// Point point = tool.区域找图EX(model_point.x - 148, model_point.y
-				// + 590, model_point.x - 92, model_point.y + 680, 0.10,
-				// "加工石.bmp");
-				// if (point == null) {
-				// tool.区域找图EX(model_point.x - 148, model_point.y + 590,
-				// model_point.x - 92, model_point.y + 680, 0.10, "加工石2.bmp");
-				// }
-				// if (point != null) {
-				// System.out.println(point);
-				// tool.mouseMovePressOne(point.x + 50, point.y + 15,
-				// InputEvent.BUTTON1_MASK);
-				// } else
-				// 929 792 1135 175
+			} else {// 958 840 1156 219
 				tool.mouseMovePressOne(model_point.x - 206, model_point.y + 618, InputEvent.BUTTON1_MASK);
 			}
 			tool.delay(3000);
-			if (model_point == null && isTrue
-					&& (GameUIModel.FindXX2(tool, model_point.x - 20, model_point.y - 20, model_point.x + 50, model_point.y + 50)) != null) {
+			if (model_point == null && isTrue && (GameUIModel.FindXX2(tool, model_point.x - 20, model_point.y - 20,
+					model_point.x + 50, model_point.y + 50)) != null) {
 				// 负重
 				if (DataSave.JGNP)
 					tool.keyPressOne(KeyEvent.VK_ESCAPE);
@@ -686,7 +713,8 @@ public class JGHandle {
 			int y1 = SCREEN_LOCTION.y + SCREEN_SIZE.height - 196;
 			Point p = null;
 			long time = System.currentTimeMillis();
-			while ((p = tool.区域找色(x1, y1 - 100, x1 + 5, y1 + 100, 0.07, 1, "89CF11")) == null && isTrue && System.currentTimeMillis() - time < 2000) {
+			while ((p = tool.区域找色(x1, y1 - 100, x1 + 5, y1 + 100, 0.07, 1, "89CF11")) == null && isTrue
+					&& System.currentTimeMillis() - time < 2000) {
 				Other.sleep(40);
 			}
 			if (p == null) {
@@ -760,23 +788,29 @@ public class JGHandle {
 
 				int x1 = SCREEN_LOCTION.x + SCREEN_SIZE.width - 448;
 				int y1 = SCREEN_LOCTION.y + SCREEN_SIZE.height / 2 - 224;
-				BB_XY = GameUIModel.FindXX(tool, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 100, DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X,
-						DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT);
+				BB_XY = GameUIModel.FindXX(tool, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y,
+						DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT);
 
 				if (BB_XY != null) {
 					BB_XY.x -= 403;
-					BB_XY.y += 127;
+					BB_XY.y += 120;
 				} else {
 					BB_XY = new Point(x1, y1);
 				}
 			}
 			System.out.println(BB_XY);
 			tool.delay(1000);// 1486 360 317
+			boolean bool = false;
 			for (int i = 0; i < size; i++) {
 
-				if (null != tool.区域找图(BB_XY.x + i * 54, BB_XY.y, BB_XY.x + i * 54 + 18 + 15, BB_XY.y + 18 + 15, 0.05, "空格子.bmp")) {
-					return;
+				if (null != tool.区域找图(BB_XY.x + i * 54, BB_XY.y, BB_XY.x + i * 54 + 18 + 15, BB_XY.y + 18 + 15, 0.05,
+						"空格子.bmp")) {
+					if (bool)
+						return;
+					else
+						continue;
 				}
+				bool = true;
 				tool.mouseMovePressOne(BB_XY.x + i * 54, BB_XY.y, InputEvent.BUTTON3_MASK);
 				tool.delay(1000);
 				tool.keyPressOne(KeyEvent.VK_F);
@@ -806,8 +840,10 @@ public class JGHandle {
 							p = CK_point;
 							break;
 						}
-						tool.保存截屏(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176, SCREEN_LOCTION.y + SCREEN_SIZE.height - 250,
-								SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 50, SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, "仓库npc.bmp");
+						tool.保存截屏(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176,
+								SCREEN_LOCTION.y + SCREEN_SIZE.height - 250,
+								SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 50,
+								SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, "仓库npc.bmp");
 						tool.keyPressOne(KeyEvent.VK_ESCAPE);
 						tool.delay(1000);
 						if (!DSHandle.AutoCheckIn()) {
@@ -819,11 +855,12 @@ public class JGHandle {
 						tool.keyPressOne(KeyEvent.VK_R);
 						time = System.currentTimeMillis();
 					} // 784 830 824 874
-				} while ((p = tool.区域找图EX(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176, SCREEN_LOCTION.y + SCREEN_SIZE.height - 250,
-						SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 50, SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, 0.07, "仓库.bmp")) == null && isTrue);
+				} while ((p = tool.区域找图EX(SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 176,
+						SCREEN_LOCTION.y + SCREEN_SIZE.height - 250, SCREEN_LOCTION.x + SCREEN_SIZE.width / 2 - 50,
+						SCREEN_LOCTION.y + SCREEN_SIZE.height - 206, 0.07, "仓库.bmp")) == null && isTrue);
 				if (!isTrue)
 					return;
-				CK_point = p; 
+				CK_point = p;
 			} else {
 				CK_point = DataSave.warehousePoint;
 			}
@@ -853,11 +890,14 @@ public class JGHandle {
 			System.out.println("寻找npc!" + i);
 			while (isTrue && System.currentTimeMillis() - time < 2000) {
 				Point p = null;
-				if ((p = tool.区域找图(DataSave.SCREEN_X, DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH, DataSave.SCREEN_HEIGHT, 0.18, "对话.bmp")) != null) {
+				if ((p = tool.区域找图(DataSave.SCREEN_X, DataSave.SCREEN_Y, DataSave.SCREEN_WIDTH, DataSave.SCREEN_HEIGHT,
+						0.18, "对话.bmp")) != null) {
 					// 659,233,815,381
 					if ((tool.区域找图(p.x - 200 + DataSave.SCREEN_X < 0 ? 0 : p.x - 200, p.y,
-							p.x + 200 > DataSave.SCREEN_WIDTH + DataSave.SCREEN_X ? DataSave.SCREEN_WIDTH + DataSave.SCREEN_X : p.x + 200, p.y + 500, 0.18,
-							"问候.bmp")) != null) {
+							p.x + 200 > DataSave.SCREEN_WIDTH + DataSave.SCREEN_X
+									? DataSave.SCREEN_WIDTH + DataSave.SCREEN_X
+									: p.x + 200,
+							p.y + 500, 0.18, "问候.bmp")) != null) {
 						System.out.println("成功寻找npc!");
 						return;
 					}
@@ -893,11 +933,12 @@ public class JGHandle {
 			long time = System.currentTimeMillis();
 			while (isTrue) {
 				// 1403,63,1534,165
-				p = tool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 517, DataSave.SCREEN_Y + 63, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 385,
-						DataSave.SCREEN_Y + 160, 0.15, "贸易仓库.bmp");
+				p = tool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 517, DataSave.SCREEN_Y + 63,
+						DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 385, DataSave.SCREEN_Y + 160, 0.15, "贸易仓库.bmp");
 				if (p != null)
 					break;
-				tool.mouseMovePressOne(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - (1920 - 1566), DataSave.SCREEN_Y + 17, InputEvent.BUTTON1_MASK);
+				tool.mouseMovePressOne(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - (1920 - 1566),
+						DataSave.SCREEN_Y + 17, InputEvent.BUTTON1_MASK);
 				Other.sleep(2000);
 				if (System.currentTimeMillis() - time > 5 * 1000) {
 					if (!GameListenerThread.DJNI.isCorsurShow())

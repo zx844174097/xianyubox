@@ -76,4 +76,12 @@ public class GameUIModel {
 		}
 	}
 
+	public static Point Findjgbb4(Tool tool, int x1, int y1, int  x2, int y2) {
+		return Find(tool, x1, y1, x2, y2, 0.02, "jgbb4.bmp");
+	}
+
+	public static Point FindjgbbSafe(Tool tool, int x1, int y1, int  x2, int y2) {
+		return Find(tool, x1, y1, x2, y2, 0.02, "jgbb5.bmp");
+	}
+
 }

@@ -109,16 +109,16 @@ public class DyHandle {
 
 		@Override
 		public void run() {
-			if (DataSave.dy.isSystemfishing()&&stop_time==0) {
+			if (DataSave.dy.isSystemfishing() && stop_time == 0) {
 				RUN2();
 			} else {
 				RUN();
-				if(stop_time!=0&&DataSave.dy.isSystemfishing()) {
+				if (stop_time != 0 && DataSave.dy.isSystemfishing()) {
 					RUN2();
-				}else {
+				} else {
 					DyHandle.stop();
 				}
-			} 
+			}
 			System.out.println("钓鱼停止了1");
 		}
 
@@ -293,8 +293,8 @@ public class DyHandle {
 			long waitTime = DataSave.dy.getDyWaitTime();
 			long numTime = System.currentTimeMillis();
 			while (isTrue) {
-				if(stop_time!=0&&System.currentTimeMillis()-stop_time>0) {
-					isTrue=false;
+				if (stop_time != 0 && System.currentTimeMillis() - stop_time > 0) {
+					isTrue = false;
 					return;
 				}
 				int liang = Integer.parseInt(DataSave.deBug.调整姿势的前置时间.getText().trim());
@@ -465,12 +465,13 @@ public class DyHandle {
 			TCPModel.bool_listener = true;
 			System.out.println("判断周围是否有人");
 			time = System.currentTimeMillis();
-			shouTool.mouseMove(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - i % (DataSave.SCREEN_WIDTH + 600), DataSave.SCREEN_HEIGHT / 2 + DataSave.SCREEN_Y);
+			shouTool.mouseMove(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - i % (DataSave.SCREEN_WIDTH + 600),
+					DataSave.SCREEN_HEIGHT / 2 + DataSave.SCREEN_Y);
 			i += 600;
 			shouTool.delay(500);
 
-			BufferedImage image = shouTool.截取屏幕(DataSave.SCREEN_X, DataSave.SCREEN_Y, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH,
-					DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT);
+			BufferedImage image = shouTool.截取屏幕(DataSave.SCREEN_X, DataSave.SCREEN_Y,
+					DataSave.SCREEN_X + DataSave.SCREEN_WIDTH, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT);
 			BufferedImage linTmp = ImgTool.cutImage(image, image.getWidth() - 260, 72, 260 - 73, 247 - 72);
 
 			boolean bool = true;
@@ -518,16 +519,21 @@ public class DyHandle {
 			while (isTrue) {
 				DSHandle.AutoCheckIn();
 				bool = false;
-				if (DataSave.dy.isMan() && (shouTool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 260, DataSave.SCREEN_Y + 72,
-						DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 73, DataSave.SCREEN_Y + 247, 0.001, "人.bmp") != null && isTrue)) {
+				if (DataSave.dy.isMan() && (shouTool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 260,
+						DataSave.SCREEN_Y + 72, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 73, DataSave.SCREEN_Y + 247,
+						0.001, "人.bmp") != null && isTrue)) {
 					bool = true;
 				}
-				if (!bool && DataSave.监视公会 && shouTool.区域找图EX(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 260, DataSave.SCREEN_Y + 72,
-						DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 73, DataSave.SCREEN_Y + 247, 0.05, "工会成员.bmp") != null) {
+				if (!bool && DataSave.监视公会
+						&& shouTool.区域找图EX(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 260, DataSave.SCREEN_Y + 72,
+								DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 73, DataSave.SCREEN_Y + 247, 0.05,
+								"工会成员.bmp") != null) {
 					bool = true;
 				}
-				if (!bool && DataSave.被转移 && shouTool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 40, DataSave.SCREEN_Y + 48,
-						DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 38, DataSave.SCREEN_Y + 50, 0, listener_image) == null) {
+				if (!bool && DataSave.被转移
+						&& shouTool.区域找图(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 40, DataSave.SCREEN_Y + 48,
+								DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 38, DataSave.SCREEN_Y + 50, 0,
+								listener_image) == null) {
 					System.out.println("被转移");
 					bool = true;
 				}
@@ -540,8 +546,10 @@ public class DyHandle {
 				// System.out.println("有私聊1");
 				// bool = true;
 				// } else
-				if (!bool && DataSave.监听对话 && shouTool.区域找色(62 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT - 200 + DataSave.SCREEN_Y, 350 + DataSave.SCREEN_X,
-						DataSave.SCREEN_HEIGHT - 50 + DataSave.SCREEN_Y, 0.36, 40, "44F547") != null) {
+				if (!bool && DataSave.监听对话
+						&& shouTool.区域找色(62 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT - 200 + DataSave.SCREEN_Y,
+								350 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT - 50 + DataSave.SCREEN_Y, 0.36, 40,
+								"44F547") != null) {
 					System.out.println("有私聊2");
 					bool = true;
 				}
@@ -593,8 +601,8 @@ public class DyHandle {
 
 		private boolean dyProfect() {
 			int w = DataSave.SCREEN_WIDTH / 2;
-			if (shouTool.区域找色(w - 92 + DataSave.SCREEN_X, 479 + DataSave.SCREEN_Y, w + 88 + DataSave.SCREEN_X, 516 + DataSave.SCREEN_Y, 0.1, 50,
-					"86DFEC") != null) {
+			if (shouTool.区域找色(w - 92 + DataSave.SCREEN_X, 479 + DataSave.SCREEN_Y, w + 88 + DataSave.SCREEN_X,
+					516 + DataSave.SCREEN_Y, 0.1, 50, "86DFEC") != null) {
 				return true;
 			}
 			return false;
@@ -623,8 +631,10 @@ public class DyHandle {
 			if (d <= 0)
 				d = 0;
 			for (int j = 0; j < yuGan.length; j++) {
-				Point p = shouTool.区域找图(DataSave.SCREEN_WIDTH - 473 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 367 + DataSave.SCREEN_Y,
-						DataSave.SCREEN_WIDTH - 5 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 366 + DataSave.SCREEN_Y, d, yuGan[j]);
+				Point p = shouTool.区域找图(DataSave.SCREEN_WIDTH - 473 + DataSave.SCREEN_X,
+						DataSave.SCREEN_HEIGHT / 2 - 367 + DataSave.SCREEN_Y,
+						DataSave.SCREEN_WIDTH - 5 + DataSave.SCREEN_X,
+						DataSave.SCREEN_HEIGHT / 2 + 366 + DataSave.SCREEN_Y, d, yuGan[j]);
 				if (p != null) {
 					shouTool.mouseMove(p.x + yuGan[j].getWidth() / 2, p.y + yuGan[j].getHeight() / 2);
 					i = Integer.parseInt(DataSave.deBug.更换鱼竿的前置时间.getText().trim());
@@ -651,8 +661,10 @@ public class DyHandle {
 			double d = Double.parseDouble(DataSave.deBug.鱼竿检测准确度.getText().trim());
 			if (d <= 0)
 				d = 0;
-			Point p = shouTool.区域找图(DataSave.SCREEN_WIDTH - 420 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 222 + DataSave.SCREEN_Y,
-					DataSave.SCREEN_WIDTH - 16 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 169 + DataSave.SCREEN_Y, d, "坏鱼竿.bmp");
+			Point p = shouTool.区域找图(DataSave.SCREEN_WIDTH - 420 + DataSave.SCREEN_X,
+					DataSave.SCREEN_HEIGHT / 2 - 222 + DataSave.SCREEN_Y,
+					DataSave.SCREEN_WIDTH - 16 + DataSave.SCREEN_X,
+					DataSave.SCREEN_HEIGHT / 2 + 169 + DataSave.SCREEN_Y, d, "坏鱼竿.bmp");
 			if (p != null) {
 				shouTool.delay(200);
 				shouTool.mouseMove(p.x, p.y);
@@ -660,7 +672,8 @@ public class DyHandle {
 				shouTool.mousePress(InputEvent.BUTTON1_MASK);
 				shouTool.delay(200);
 				// 1859 858
-				shouTool.mouseMove(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 61, DataSave.SCREEN_HEIGHT / 2 + DataSave.SCREEN_Y + 318);
+				shouTool.mouseMove(DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 61,
+						DataSave.SCREEN_HEIGHT / 2 + DataSave.SCREEN_Y + 318);
 				shouTool.delay(200);
 				shouTool.mouseRelease(InputEvent.BUTTON1_MASK);
 				shouTool.delay(200);
@@ -693,19 +706,26 @@ public class DyHandle {
 
 		private void yuPanduan(int time) {
 			if (num == 15)
-				return;// 1530 587 1730 650
-			int w = DataSave.SCREEN_WIDTH - 385 + DataSave.SCREEN_X;
-			int h = DataSave.SCREEN_HEIGHT - 486 + DataSave.SCREEN_Y;
-			int w2 = DataSave.SCREEN_WIDTH - 190 + DataSave.SCREEN_X;
+				return;// 1695 749 1415 615
+
+		Point point = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X, DataSave.SCREEN_Y,
+					DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT + DataSave.SCREEN_Y, 0.15,
+					"拾取栏.bmp");
+			if (point == null)
+				return;
+			System.out.println("yuPanduan:" + point);//1461 554 1752 511 1780 614
+			int w = point.x - (1752 - 1461);
+			int h = point.y + (554 - 511);
+			int w2 = point.x + (1780 - 1752);
 			int h2 = h + 10;
 			BufferedImage image = shouTool.截取屏幕(w, h, w2, h2);
+
+			shouTool.保存图片(image, Other.getShortUuid() + "_鱼.bmp");
 			Point t = null;
 			if (System.currentTimeMillis() > yh_time) {
 				if (DataSave.黄) {
 					t = shouTool.图中找图EX(image, "黄.bmp", 0.07, w, h);
 					if (t != null) {
-						// shouTool.保存图片(image, Other.getShortUuid() +
-						// "_黄.bmp");
 						System.out.println("黄： " + t);
 						shouY(t, time, 0);
 						yuPanduan(200);
@@ -749,6 +769,7 @@ public class DyHandle {
 			h = h - 5;
 			h2 = h + 48 + 10;
 			image = shouTool.截取屏幕(w, h, w2, h2);
+//			shouTool.保存图片(image, Other.getShortUuid() + "_区域.bmp");
 			if (DataSave.碎片) {
 				t = shouTool.图中找图(image, "碎片.bmp", 0.12, w, h);
 				if (t != null) {
@@ -858,8 +879,8 @@ public class DyHandle {
 			long time = System.currentTimeMillis();
 			while (isTrue && System.currentTimeMillis() - time < 1000 * 5) {
 				// while (isTrue && i != 0 || i == -1) {
-				Point p = shouTool.区域找图(w + DataSave.SCREEN_X, 389 + DataSave.SCREEN_Y, w + 90 + DataSave.SCREEN_X, 471 + DataSave.SCREEN_Y, d,
-						!DataSave.服务器.equals("台服") ? "验证码时间条.bmp" : "验证码时间条2.bmp");
+				Point p = shouTool.区域找图(w + DataSave.SCREEN_X, 389 + DataSave.SCREEN_Y, w + 90 + DataSave.SCREEN_X,
+						471 + DataSave.SCREEN_Y, d, !DataSave.服务器.equals("台服") ? "验证码时间条.bmp" : "验证码时间条2.bmp");
 				if (p != null) {
 					return p;
 				}
@@ -891,8 +912,8 @@ public class DyHandle {
 					long time = System.currentTimeMillis();
 					Tool tool = new Tool();
 					while (isTrue && System.currentTimeMillis() - time < 5000 && !isSpace) {
-						Point p = tool.区域找色(w + 34 + DataSave.SCREEN_X, 390 + DataSave.SCREEN_Y, w + 43 + DataSave.SCREEN_X, 430 + DataSave.SCREEN_Y, d, liang,
-								"A18659");
+						Point p = tool.区域找色(w + 34 + DataSave.SCREEN_X, 390 + DataSave.SCREEN_Y,
+								w + 43 + DataSave.SCREEN_X, 430 + DataSave.SCREEN_Y, d, liang, "A18659");
 						if (p != null) {
 							isSpace = true;
 							return;
@@ -918,8 +939,8 @@ public class DyHandle {
 						liang = 220;
 					Tool tool = new Tool();
 					while (isTrue && !isSpace) {
-						Point p = tool.区域找图(w - 190 + DataSave.SCREEN_X, 367 + DataSave.SCREEN_Y, w - 98 + DataSave.SCREEN_X, 458 + DataSave.SCREEN_Y, d,
-								"蓝色条.bmp");
+						Point p = tool.区域找图(w - 190 + DataSave.SCREEN_X, 367 + DataSave.SCREEN_Y,
+								w - 98 + DataSave.SCREEN_X, 458 + DataSave.SCREEN_Y, d, "蓝色条.bmp");
 						if (p != null) {
 							Other.sleep(liang);
 							isSpace = true;
