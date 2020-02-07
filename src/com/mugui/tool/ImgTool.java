@@ -2,6 +2,7 @@ package com.mugui.tool;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -30,10 +31,12 @@ public class ImgTool {
 			TableColumn column = (TableColumn) columns.nextElement();
 			int col = header.getColumnModel().getColumnIndex(column.getIdentifier());
 			int width = (int) myTable.getTableHeader().getDefaultRenderer()
-					.getTableCellRendererComponent(myTable, column.getIdentifier(), false, false, -1, col).getPreferredSize().getWidth();
+					.getTableCellRendererComponent(myTable, column.getIdentifier(), false, false, -1, col)
+					.getPreferredSize().getWidth();
 			for (int row = 0; row < rowCount; row++) {
 				int preferedWidth = (int) myTable.getCellRenderer(row, col)
-						.getTableCellRendererComponent(myTable, myTable.getValueAt(row, col), false, false, row, col).getPreferredSize().getWidth();
+						.getTableCellRendererComponent(myTable, myTable.getValueAt(row, col), false, false, row, col)
+						.getPreferredSize().getWidth();
 				width = Math.max(width, preferedWidth);
 			}
 			header.setResizingColumn(column); // ���к���Ҫ
@@ -46,8 +49,7 @@ public class ImgTool {
 	// 图片剪裁
 	public static BufferedImage cutImage(BufferedImage img, int x, int y, int w, int h) {
 		try {
-
-			return img.getSubimage(x, y, w, h);
+			return copyBufferedImage(img.getSubimage(x, y, w, h));
 		} catch (Exception e) {
 			try {
 				throw new Exception(img.getWidth() + " " + img.getHeight() + " " + x + " " + y + " " + w + " " + h);
@@ -58,9 +60,18 @@ public class ImgTool {
 		}
 	}
 
+	public static BufferedImage copyBufferedImage(BufferedImage src) {
+		BufferedImage copy = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = copy.createGraphics();
+		g.drawImage(src, 0, 0, copy.getWidth(), copy.getHeight(), null);
+		g.dispose();
+		return copy;
+	}
+
 	// 图片二值化处理
 	public static BufferedImage binaryzationImage2(BufferedImage image) {
-		BufferedImage grayImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+		BufferedImage grayImage = new BufferedImage(image.getWidth(), image.getHeight(),
+				BufferedImage.TYPE_BYTE_BINARY);
 		int color = image.getRGB(0, 0);
 		int color2 = new Color(255, 255, 255).getRGB();
 		for (int i = 0; i < image.getWidth(); i++) {
@@ -127,8 +138,10 @@ public class ImgTool {
 	 * @return
 	 */
 	public static BufferedImage imageEnlarge(BufferedImage image, double i) {
-		BufferedImage result = new BufferedImage((int) (i * image.getWidth()), (int) (i * image.getHeight()), BufferedImage.TYPE_INT_RGB);
-		result.getGraphics().drawImage(image.getScaledInstance((int) (i * image.getWidth()), (int) (i * image.getHeight()), Image.SCALE_SMOOTH), 0, 0, null);
+		BufferedImage result = new BufferedImage((int) (i * image.getWidth()), (int) (i * image.getHeight()),
+				BufferedImage.TYPE_INT_RGB);
+		result.getGraphics().drawImage(image.getScaledInstance((int) (i * image.getWidth()),
+				(int) (i * image.getHeight()), Image.SCALE_SMOOTH), 0, 0, null);
 		return result;
 	}
 
@@ -150,8 +163,8 @@ public class ImgTool {
 		} else {
 			fan = height / (h * 1.0);
 		}
-		result.getGraphics().drawImage(image.getScaledInstance((int) (w * fan), (int) (h * fan), Image.SCALE_SMOOTH), -(int) (w * fan) / 2 + width / 2,
-				-(int) (h * fan) / 2 + height / 2, null);
+		result.getGraphics().drawImage(image.getScaledInstance((int) (w * fan), (int) (h * fan), Image.SCALE_SMOOTH),
+				-(int) (w * fan) / 2 + width / 2, -(int) (h * fan) / 2 + height / 2, null);
 		return result;
 	}
 

@@ -23,6 +23,7 @@ import com.mugui.model.CmdModel;
 import com.mugui.model.HsAllModel;
 import com.mugui.tool.Other;
 import com.mugui.ui.DataSave;
+import com.mugui.windows.Tool;
 
 public class MAIN {
 	protected static final String UI_MANAGER[] = null;
@@ -123,9 +124,9 @@ public class MAIN {
 			}
 		});
 
-//		 init();
-//		 System.setOut(outputStream);
-//		 System.setErr(outputStream);
+		 init();
+		 System.setOut(outputStream);
+		 System.setErr(outputStream);
 		System.setOut(new PrintStream(System.out) {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -156,30 +157,13 @@ public class MAIN {
 		save.init();
 		save.start();
 		System.getProperties().put("DataSave", save);
-		// String str=
-		// "https://cn-sccd3-cmcc-v-10.a0gvideo.com/upgcxcode/22/70/74447022/74447022-1-30080.m4s?expires=1549270500&platform=pc&ssig=pAk9KdSUUzSIcTCSoW0TDA&oi=1974286648&hfb=Yjk5ZmZjM2M1YzY4ZjAwYTMzMTIzYmIyNWY4ODJkNWI=";
-		// System.out.println(str.matches(""));
 
 //		Tool shouTool = new Tool();
 //
 //		BufferedImage bufferedImage;
 //		try {
-//			bufferedImage = shouTool.getDImg("1.BMP").bufferedImage;
-//			BufferedImage temp = ImgTool.cutImage(bufferedImage, 1073, 290, 1093 - 1073, 590 - 290);
-//			shouTool.保存图片(temp, "temp1.bmp");
-//			Point point = shouTool.图中找图EX(temp, "lm_sx.bmp", 0.15, 0, 0);
-//
-//			System.out.println(point);
-//			
-//			temp = ImgTool.cutImage(bufferedImage, 1920/2-96, 173, 62+96, 173-158);
-//			shouTool.保存图片(temp, "temp2.bmp");
-//			point = shouTool.图中找色(temp, 0.15, 40, "5CA3AA", 0,0);
-//			
-//			System.out.println(point);
-//			temp = ImgTool.cutImage(bufferedImage,911, 152, 973-911, 280-152);
-//			shouTool.保存图片(temp, "temp2.bmp");
-//			point = shouTool.图中找色(temp, 0.15, 50, "006E95", 0,0);
-//			System.out.println(point);
+//			bufferedImage = shouTool.getDImg("1580942722150_识别区.bmp").bufferedImage;
+//			shouTool.chuli(bufferedImage);
 //		} catch (IOException e) { 
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();

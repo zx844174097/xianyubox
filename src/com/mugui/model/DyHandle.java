@@ -601,9 +601,17 @@ public class DyHandle {
 
 		private boolean dyProfect() {
 			int w = DataSave.SCREEN_WIDTH / 2;
-			if (shouTool.区域找色(w - 92 + DataSave.SCREEN_X, 479 + DataSave.SCREEN_Y, w + 88 + DataSave.SCREEN_X,
-					516 + DataSave.SCREEN_Y, 0.1, 50, "86DFEC") != null) {
-				return true;
+			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {
+				if (shouTool.区域找色(w - 124 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 93 + DataSave.SCREEN_Y,
+						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 7 + DataSave.SCREEN_Y, 0.1, 50,
+						"218FDC") != null) {
+					return true;
+				}
+			} else {
+				if (shouTool.区域找色(w - 92 + DataSave.SCREEN_X, 479 + DataSave.SCREEN_Y, w + 88 + DataSave.SCREEN_X,
+						516 + DataSave.SCREEN_Y, 0.1, 50, "86DFEC") != null) {
+					return true;
+				}
 			}
 			return false;
 		}
@@ -708,12 +716,12 @@ public class DyHandle {
 			if (num == 15)
 				return;// 1695 749 1415 615
 
-		Point point = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X, DataSave.SCREEN_Y,
+			Point point = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X, DataSave.SCREEN_Y,
 					DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT + DataSave.SCREEN_Y, 0.15,
 					"拾取栏.bmp");
 			if (point == null)
 				return;
-			System.out.println("yuPanduan:" + point);//1461 554 1752 511 1780 614
+			System.out.println("yuPanduan:" + point);// 1461 554 1752 511 1780 614
 			int w = point.x - (1752 - 1461);
 			int h = point.y + (554 - 511);
 			int w2 = point.x + (1780 - 1752);
@@ -867,6 +875,9 @@ public class DyHandle {
 			// 0.5) {
 			// return false;
 			// }
+			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398 789 417
+				return shouTool.paint(p.x + 3, p.y - 25, p.x + 370, p.y - 12);
+			}
 			return shouTool.paint(p.x - 50, p.y - 40, p.x + 300, p.y - 30);
 		}
 
@@ -879,9 +890,17 @@ public class DyHandle {
 			long time = System.currentTimeMillis();
 			while (isTrue && System.currentTimeMillis() - time < 1000 * 5) {
 				// while (isTrue && i != 0 || i == -1) {
-				Point p = shouTool.区域找图(w + DataSave.SCREEN_X, 389 + DataSave.SCREEN_Y, w + 90 + DataSave.SCREEN_X,
-						471 + DataSave.SCREEN_Y, d, !DataSave.服务器.equals("台服") ? "验证码时间条.bmp" : "验证码时间条2.bmp");
+				Point p = null;
+				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398 789 417
+					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 300 + DataSave.SCREEN_X, 100 + DataSave.SCREEN_Y,
+							DataSave.SCREEN_WIDTH / 2 - 50 + DataSave.SCREEN_X,
+							DataSave.SCREEN_HEIGHT / 2 + 500 + DataSave.SCREEN_Y, d + 0.05, "新验证码时间条.bmp");
+				} else {
+					p = shouTool.区域找图(w + DataSave.SCREEN_X, 389 + DataSave.SCREEN_Y, w + 90 + DataSave.SCREEN_X,
+							471 + DataSave.SCREEN_Y, d, !DataSave.服务器.equals("台服") ? "验证码时间条.bmp" : "验证码时间条2.bmp");
+				}
 				if (p != null) {
+					System.out.println("验证码识别：" + p);
 					return p;
 				}
 				shouTool.delay(25);
@@ -911,9 +930,21 @@ public class DyHandle {
 						liang = 0;
 					long time = System.currentTimeMillis();
 					Tool tool = new Tool();
+					Point p = null;// C28F4E
+					Point point = null;
 					while (isTrue && System.currentTimeMillis() - time < 5000 && !isSpace) {
-						Point p = tool.区域找色(w + 34 + DataSave.SCREEN_X, 390 + DataSave.SCREEN_Y,
-								w + 43 + DataSave.SCREEN_X, 430 + DataSave.SCREEN_Y, d, liang, "A18659");
+						if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 100 90 831 372 0.96875
+							if (point == null) {
+								point = tool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 37,
+										DataSave.SCREEN_Y + 100, DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 58,
+										DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2, 0.07, "蓝色条识别码.bmp");
+							}
+							if (point != null)
+								p = tool.区域找色(point.x + 10, point.y + 13, point.x + 13, point.y + 27, d, 3, "C28F4E");
+						} else
+							p = tool.区域找色(w + 34 + DataSave.SCREEN_X, 390 + DataSave.SCREEN_Y,
+									w + 43 + DataSave.SCREEN_X, 430 + DataSave.SCREEN_Y, d, liang, "A18659");
+
 						if (p != null) {
 							isSpace = true;
 							return;
@@ -973,8 +1004,14 @@ public class DyHandle {
 				d = 0;
 			int w = (int) (DataSave.SCREEN_WIDTH - 141) / 2 + DataSave.SCREEN_X;
 			int h = 147 + DataSave.SCREEN_Y;
+			Point p = null;
 			while (isTrue && i != 0 || i == -1) {
-				Point p = shouTool.区域找色(w, h, w + 141, h + 60 * 2, d, shuliang, "006E95");
+				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {
+					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
+							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, 0.15, "space.bmp");
+				} else
+					p = shouTool.区域找色(w, h, w + 141, h + 60 * 2, d, shuliang, "006E95");
 				if (p != null) {
 					System.out.println("找到空格按钮");
 					return true;

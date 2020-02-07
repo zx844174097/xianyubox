@@ -55,7 +55,7 @@ public class HsAllModel {
 				FishPrice.addLineFeature(key, image);
 				FishPrice.setLineTime(key, time);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			DataSave.D_LINE_ID = index;
 		} finally {
 			if (dataInputStream != null) {

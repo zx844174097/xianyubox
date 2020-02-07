@@ -142,11 +142,14 @@ public class Tool {
 			GameListenerThread.DJNI = new DJni();
 		}
 		if (!DJni.isTrue && DataSave.图像截图) {
-			bufferedImage1 = GameListenerThread.DJNI.createScreenCapture(configuration.x + x, configuration.x + y, x2 - x, y2 - y);
+			bufferedImage1 = GameListenerThread.DJNI.createScreenCapture(configuration.x + x, configuration.x + y,
+					x2 - x, y2 - y);
 		} else
-			bufferedImage1 = robot.createScreenCapture(new Rectangle(configuration.x + x, configuration.y + y, x2 - x, y2 - y));
+			bufferedImage1 = robot
+					.createScreenCapture(new Rectangle(configuration.x + x, configuration.y + y, x2 - x, y2 - y));
 		if (bufferedImage1 == null) {
-			return bufferedImage1 = robot.createScreenCapture(new Rectangle(configuration.x + x, configuration.y + y, x2 - x, y2 - y));
+			return bufferedImage1 = robot
+					.createScreenCapture(new Rectangle(configuration.x + x, configuration.y + y, x2 - x, y2 - y));
 
 		}
 		return bufferedImage1;
@@ -514,7 +517,8 @@ public class Tool {
 	public hls[][] 得到图片数组EX(BufferedImage image) {
 		hls[][] hl = new hls[image.getWidth()][image.getHeight()];
 		Color color = null;
-		if (image.getRGB(0, 0) == image.getRGB(image.getWidth() - 1, 0) && image.getRGB(0, 0) == image.getRGB(0, image.getHeight() - 1)
+		if (image.getRGB(0, 0) == image.getRGB(image.getWidth() - 1, 0)
+				&& image.getRGB(0, 0) == image.getRGB(0, image.getHeight() - 1)
 				&& image.getRGB(0, 0) == image.getRGB(image.getWidth() - 1, image.getHeight() - 1)) {
 			color = new Color(image.getRGB(0, 0));
 		}
@@ -548,6 +552,7 @@ public class Tool {
 	public boolean paint(int x1, int y1, int x2, int y2) {
 		BufferedImage image = 截取屏幕(x1, y1, x2, y2);
 		DataSave.dy.init(image);
+		保存图片(image, System.currentTimeMillis() + "_识别区.bmp");
 		if (chuli(image).trim().equals("")) {
 			return false;
 		}
@@ -600,14 +605,60 @@ public class Tool {
 //		return g;
 //	}
 
-	private int chuli2(BufferedImage image, int[][] tu) {
+	private int chuli2(BufferedImage image) {
+		if (DataSave.服务器.equals("韩服") || DataSave.服务器.equals("台服") || DataSave.服务器.equals("steam服")) {
 
-		Color c = StringColor("5B5B5B");
-		Color c2 = new Color(image.getRGB(19, 4));
-		if (颜色比较(c, c2) > 0.07 && 颜色比较(c2, new Color(image.getRGB(19 + 35, 4))) <= 0.07) {
-			return c2.getRGB();
+			image = ImgTool.cutImage(image, 0, 0, 200, image.getHeight());
+			int color = image.getRGB(0, 5);
+			for (int i = 1; i < image.getWidth() && i < 200; i++) {
+				if (颜色比较(new Color(color), new Color(image.getRGB(i, 5))) > 0.07) {
+					color = image.getRGB(i, 5);
+					if (color == -1) {
+						continue;
+					}
+					int num = searchColorNum(color, image, i, 5);
+					System.out.println("num=" + num + " ");
+					if (num >= 20 && num <= 40) {
+						return color;
+					}
+				}
+			}
+
+		} else {
+			Color c = StringColor("5B5B5B");
+			Color c2 = new Color(image.getRGB(19, 4));
+			if (颜色比较(c, c2) > 0.07 && 颜色比较(c2, new Color(image.getRGB(19 + 35, 4))) <= 0.07) {
+				return c2.getRGB();
+			}
 		}
 		return 0;
+	}
+
+	private int searchColorNum(int color, BufferedImage image, int i, int j) {
+		if (image.getRGB(i, j) == -1)
+			return 0;
+		image.setRGB(i, j, -1);
+		if (i <= 0 || j <= 0 || i >= image.getWidth() - 1 || j >= image.getHeight() - 1) {
+			return 0;
+		}
+		int num = 0;
+		if (颜色比较(new Color(color), new Color(image.getRGB(i - 1, j))) <= 0.07) {
+			num++;
+			num += searchColorNum(color, image, i - 1, j);
+		}
+		if (颜色比较(new Color(color), new Color(image.getRGB(i + 1, j))) <= 0.07) {
+			num++;
+			num += searchColorNum(color, image, i + 1, j);
+		}
+		if (颜色比较(new Color(color), new Color(image.getRGB(i, j - 1))) <= 0.07) {
+			num++;
+			num += searchColorNum(color, image, i, j - 1);
+		}
+		if (颜色比较(new Color(color), new Color(image.getRGB(i, j + 1))) <= 0.07) {
+			num++;
+			num += searchColorNum(color, image, i, j + 1); 
+		}
+		return num;
 	}
 
 	public String chuli(BufferedImage image) {
@@ -620,8 +671,9 @@ public class Tool {
 		int[][] tu = new int[width][height];
 		int[][] tu2 = new int[width][height];
 		// 韩
-		maxbody = chuli2(image, tu);
+		maxbody = chuli2(image);
 		// maxbody = chuli1(image, tu);
+		System.out.println("锁定的颜色" + maxbody);
 		if (maxbody == 0)
 			return "";
 		tu = new int[width][height];
@@ -630,7 +682,7 @@ public class Tool {
 				// System.out.println(image.getHeight() + " " +
 				// image.getWidth());
 
-				if (颜色比较(new Color(image.getRGB(j, i)), new Color(maxbody)) <= 0.07) {
+				if (颜色比较(new Color(image.getRGB(j, i)), new Color(maxbody)) <= 0.2) {
 					tu[j][i] = 1;
 					tu2[j][i] = 1;
 					image.setRGB(j, i, Color.white.getRGB());
@@ -640,6 +692,7 @@ public class Tool {
 					image.setRGB(j, i, Color.black.getRGB());
 				}
 			}
+		保存图片(image, System.currentTimeMillis() + "_识别区2.bmp");
 		for (int j = 0; j < width; j++) {
 			for (int i = 0; i < height; i++) {
 				if (tu[j][i] == 1) {
@@ -655,17 +708,19 @@ public class Tool {
 					// System.out.println(size + " " + i + " " + j);
 					// System.out.println(zuox + " " + zuoy + " " + youx + " " +
 					// youy);
-					if ((tu2[zuox][zuoy] == 1 || tu2[zuox + 1][zuoy] == 1) && (tu2[zuox][youy] == 1 || tu2[zuox + 1][youy] == 1) && tu2[youx][youy] != 1
+					if ((tu2[zuox][zuoy] == 1 || tu2[zuox + 1][zuoy] == 1)
+							&& (tu2[zuox][youy] == 1 || tu2[zuox + 1][youy] == 1) && tu2[youx][youy] != 1
 							&& tu2[youx][zuoy] != 1) {
 						key += "D";
-					} else if ((tu2[zuox][zuoy] == 1 || tu2[zuox][zuoy + 1] == 1) && tu2[zuox][youy] != 1 && tu2[youx][youy] != 1
-							&& (tu2[youx][zuoy + 1] == 1 || tu2[youx][zuoy] == 1)) {
+					} else if ((tu2[zuox][zuoy] == 1 || tu2[zuox][zuoy + 1] == 1) && tu2[zuox][youy] != 1
+							&& tu2[youx][youy] != 1 && (tu2[youx][zuoy + 1] == 1 || tu2[youx][zuoy] == 1)) {
 						key += "S";
-					} else if (tu2[zuox][zuoy] != 1 && tu2[zuox][youy] != 1 && (tu2[youx][youy] == 1 || tu2[youx - 1][youy] == 1)
+					} else if (tu2[zuox][zuoy] != 1 && tu2[zuox][youy] != 1
+							&& (tu2[youx][youy] == 1 || tu2[youx - 1][youy] == 1)
 							&& (tu2[youx][zuoy] == 1 || tu2[youx - 1][zuoy] == 1)) {
 						key += "A";
-					} else if (tu2[zuox][zuoy] != 1 && (tu2[zuox][youy] == 1 || tu2[zuox][youy - 1] == 1) && (tu2[youx][youy] == 1 || tu2[youx][youy - 1] == 1)
-							&& tu2[youx][zuoy] != 1) {
+					} else if (tu2[zuox][zuoy] != 1 && (tu2[zuox][youy] == 1 || tu2[zuox][youy - 1] == 1)
+							&& (tu2[youx][youy] == 1 || tu2[youx][youy - 1] == 1) && tu2[youx][zuoy] != 1) {
 						key += "W";
 					} else {
 						int x = zuox - 2;
@@ -806,7 +861,8 @@ public class Tool {
 
 	public BufferedImage 按比例截取屏幕(int i, int j, int width, int height, double k) {
 		BufferedImage image = 截取屏幕(i, j, width, height);
-		BufferedImage img = new BufferedImage((int) ((width - i) * k), (int) ((height - j) * k), BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage((int) ((width - i) * k), (int) ((height - j) * k),
+				BufferedImage.TYPE_INT_RGB);
 		Graphics g = img.getGraphics();
 		g.drawImage(image, 0, 0, (int) ((width - i) * k), (int) ((height - j) * k), null);
 		g.dispose();
