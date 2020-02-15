@@ -125,7 +125,7 @@ public class MAIN {
 		});
 
 		 init();
-		 System.setOut(outputStream);
+		 System.setOut(outputStream); 
 		 System.setErr(outputStream);
 		System.setOut(new PrintStream(System.out) {
 			@SuppressWarnings("deprecation")

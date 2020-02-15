@@ -603,7 +603,7 @@ public class DyHandle {
 			int w = DataSave.SCREEN_WIDTH / 2;
 			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {
 				if (shouTool.区域找色(w - 124 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 93 + DataSave.SCREEN_Y,
-						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 7 + DataSave.SCREEN_Y, 0.1, 50,
+						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 90+ DataSave.SCREEN_Y, 0.1, 50,
 						"218FDC") != null) {
 					return true;
 				}
@@ -875,7 +875,8 @@ public class DyHandle {
 			// 0.5) {
 			// return false;
 			// }
-			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398 789 417
+			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398 789
+																											// 417
 				return shouTool.paint(p.x + 3, p.y - 25, p.x + 370, p.y - 12);
 			}
 			return shouTool.paint(p.x - 50, p.y - 40, p.x + 300, p.y - 30);
@@ -891,7 +892,9 @@ public class DyHandle {
 			while (isTrue && System.currentTimeMillis() - time < 1000 * 5) {
 				// while (isTrue && i != 0 || i == -1) {
 				Point p = null;
-				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398 789 417
+				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 766 398
+																												// 789
+																												// 417
 					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 300 + DataSave.SCREEN_X, 100 + DataSave.SCREEN_Y,
 							DataSave.SCREEN_WIDTH / 2 - 50 + DataSave.SCREEN_X,
 							DataSave.SCREEN_HEIGHT / 2 + 500 + DataSave.SCREEN_Y, d + 0.05, "新验证码时间条.bmp");
@@ -933,7 +936,11 @@ public class DyHandle {
 					Point p = null;// C28F4E
 					Point point = null;
 					while (isTrue && System.currentTimeMillis() - time < 5000 && !isSpace) {
-						if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 100 90 831 372 0.96875
+						if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {// 100
+																														// 90
+																														// 831
+																														// 372
+																														// 0.96875
 							if (point == null) {
 								point = tool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 37,
 										DataSave.SCREEN_Y + 100, DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 58,
@@ -1010,6 +1017,9 @@ public class DyHandle {
 					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
 							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
 							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, 0.15, "space.bmp");
+					shouTool.保存截屏(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
+							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, "space"+System.currentTimeMillis()+".bmp");
 				} else
 					p = shouTool.区域找色(w, h, w + 141, h + 60 * 2, d, shuliang, "006E95");
 				if (p != null) {
