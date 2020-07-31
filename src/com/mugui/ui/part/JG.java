@@ -254,7 +254,7 @@ public class JG extends DPanel {
 			}
 			while (bean.hasNext()) {
 				JGBean bean2 = bean.next();
-				if (bean2.getColumn() <= 0 || bean2.getRow() <= 0 || bean2.getColumn() > 8 || bean2.getRow() > 24) {
+				if (bean2.getColumn() <= 0 || bean2.getRow() <= 0 || bean2.getColumn() > 9 || bean2.getRow() > 24) {
 					JOptionPane.showMessageDialog(DataSave.StaticUI, "编号:" + panel.getNumber() + "参数超过限制，无法开始加工", "警告", JOptionPane.OK_OPTION);
 					return false;
 				}

@@ -603,8 +603,8 @@ public class DyHandle {
 			int w = DataSave.SCREEN_WIDTH / 2;
 			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")) {
 				if (shouTool.区域找色(w - 124 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 93 + DataSave.SCREEN_Y,
-						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 90+ DataSave.SCREEN_Y, 0.1, 50,
-						"218FDC") != null) {
+						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 200+ DataSave.SCREEN_Y, 0.1, 50,
+						"23B7EB") != null) {
 					return true;
 				}
 			} else {
@@ -722,7 +722,7 @@ public class DyHandle {
 			if (point == null)
 				return;
 			System.out.println("yuPanduan:" + point);// 1461 554 1752 511 1780 614
-			int w = point.x - (1752 - 1461);
+			int w = point.x - (1752 - 1461)-5;
 			int h = point.y + (554 - 511);
 			int w2 = point.x + (1780 - 1752);
 			int h2 = h + 10;
@@ -1017,9 +1017,6 @@ public class DyHandle {
 					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
 							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
 							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, 0.15, "space.bmp");
-					shouTool.保存截屏(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
-							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
-							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, "space"+System.currentTimeMillis()+".bmp");
 				} else
 					p = shouTool.区域找色(w, h, w + 141, h + 60 * 2, d, shuliang, "006E95");
 				if (p != null) {

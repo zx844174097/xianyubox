@@ -89,7 +89,7 @@ public class TCPModel {
 			else
 				DataSave.tcpSocket = new TcpSocketUserBean();
 			DataSave.tcpSocket.setSocketChannel(new TcpSocketClient("118.190.26.99", 5100));
-			//DataSave.tcpSocket.setSocketChannel(new TcpSocketClient("127.0.0.1", 5100));
+//			DataSave.tcpSocket.setSocketChannel(new TcpSocketClient("127.0.0.1", 5100));
 			DataSave.tcpSocket.reCodeTime();
 			DataSave.tcpSocket.setThreadMaxSize(20);
 			// DataSave.tcpSocket = new

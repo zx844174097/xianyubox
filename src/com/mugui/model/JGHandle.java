@@ -258,8 +258,8 @@ public class JGHandle {
 			int x1 = SCREEN_LOCTION.x + SCREEN_SIZE.width;
 			int y1 = SCREEN_LOCTION.y + SCREEN_SIZE.height / 2;
 
-			x1 = bb_xy.x - 397;
-			y1 = bb_xy.y + 131;
+			x1 = bb_xy.x - 426;
+			y1 = bb_xy.y + 146;
 
 			Iterator<JGBean> iterator = jgOtherBean.getBody().iterator();
 			// int n = 0;
@@ -272,8 +272,8 @@ public class JGHandle {
 				JGBean bean = iterator.next();
 				// int w = x1 + (bean.getColumn() - 1) * 47;
 				int row = bean.getRow();
-				int linrow = (row - 1) / 8;
-				if (row > 8) {
+				int linrow = (row - 1) / 9;
+				if (row >9) {
 					// 1254,263,1267,349, 606 128
 					// 计算拉取深度
 					if (state != linrow) {
@@ -288,26 +288,26 @@ public class JGHandle {
 					}
 					state = 0;
 				}
-				int weizhi = ((bean.getRow() - 1) % 8) * 8 + bean.getColumn() - 1;
+				int weizhi = ((bean.getRow() - 1) % 9) *9 + bean.getColumn() - 1;
 
-				int wx = x1 + weizhi % 8 * 54;
-				int zx = y1 + weizhi / 8 * 54;
+				int wx = x1 + weizhi % 9 * 50;
+				int zx = y1 + weizhi / 9 * 50;
 				tool.保存截屏(wx - 4, zx - 6, wx + 24, zx + 6, weizhi + ".bmp");
 
 				int x = 0;
 				Point point = null;
 				while (isTrue) {
-					if (weizhi - x < 0 && weizhi + x >= 64) {
+					if (weizhi - x < 0 && weizhi + x >= 81) {
 						return false;
 					}
 					int l = weizhi - x;
 					if (l >= 0) {
-						int w = x1 + l % 8 * 54;
-						int z = y1 + l / 8 * 54;
+						int w = x1 + l % 9 * 50;
+						int z = y1 + l / 9 * 50;
 						point = tool.区域找图(w - 4, z - 6, w + 24, z + 6, 0.05, bean.getImage());
 						if (point != null) {
-							point.x = l % 8 + 1;
-							point.y = l / 8 + linrow * 8 + 1;
+							point.x = l % 9 + 1;
+							point.y = l / 9 + linrow * 9 + 1;
 							// points[n++] = point;
 							bean.setColumn(point.x);
 							bean.setRow(point.y);
@@ -315,13 +315,13 @@ public class JGHandle {
 						}
 					}
 					l = weizhi + x;
-					if (l < 64) {
-						int w = x1 + l % 8 * 54;
-						int z = y1 + l / 8 * 54;
+					if (l < 81) {
+						int w = x1 + l % 9* 50;
+						int z = y1 + l / 9 * 50;
 						point = tool.区域找图(w - 4, z - 6, w + 24, z + 6, 0.05, bean.getImage());
 						if (point != null) {
-							point.x = l % 8 + 1;
-							point.y = l / 8 + linrow * 8 + 1;
+							point.x = l % 9 + 1;
+							point.y = l / 9 + linrow * 9 + 1;
 							// points[n++] = point;
 							bean.setColumn(point.x);
 							bean.setRow(point.y);
@@ -344,10 +344,10 @@ public class JGHandle {
 			JGBean bean = null;
 			while (iterator.hasNext()) {
 				bean = iterator.next();
-				int x1 = bb_xy.x - 397;
-				int y1 = bb_xy.y + 131;
+				int x1 = bb_xy.x - 426;
+				int y1 = bb_xy.y + 146;
 				int row = bean.getRow();
-				int linrow = (row - 1) / 8;
+				int linrow = (row - 1) / 9;
 				System.out.println(row);
 				if (row > 8) {
 					// 1254,263,1267,349, 606 128
@@ -365,7 +365,7 @@ public class JGHandle {
 					}
 					state = 0;
 				}
-				tool.mouseMovePressOne(x1 + (bean.getColumn() - 1) * 54 + 5, y1 + (bean.getRow() - 1) % 8 * 54 + 5,
+				tool.mouseMovePressOne(x1 + (bean.getColumn() - 1) * 50 + 5, y1 + (bean.getRow() - 1) % 9 * 50 + 5,
 						InputEvent.BUTTON3_MASK);
 				tool.delay(500);
 				byte[] b = DataSave.jg.getJGGS().trim().getBytes(Charset.forName("UTF-8"));
@@ -379,46 +379,7 @@ public class JGHandle {
 					return false;
 			}
 
-			// if (DataSave.SCREEN_WIDTH <= 1440) {
-			// int x1 = SCREEN_LOCTION.x + SCREEN_SIZE.width - 392;
-			// int y1 = SCREEN_LOCTION.y + SCREEN_SIZE.height / 2 - 189;
-			// int n = 0;
-			// if (jgOtherBean.body.size() > 1) {
-			// while (n < 2) {
-			// tool.mouseMove(x1, y1);
-			// tool.delay(200);
-			// tool.mousePress(InputEvent.BUTTON1_MASK);
-			// tool.delay(100);
-			// tool.mouseMove(x1 + jgOtherBean.getBody().size() * 54, y1);
-			// tool.delay(200);
-			// tool.mouseRelease(InputEvent.BUTTON1_MASK);
-			// tool.delay(200);
-			// tool.mousePressOne(InputEvent.BUTTON1_MASK);
-			// tool.delay(1000);
-			// tool.keyPressOne(KeyEvent.VK_F);
-			// tool.delay(1000);
-			// tool.keyPressOne(KeyEvent.VK_ENTER);
-			// tool.delay(1000);
-			// n++;
-			// x1 += 54;
-			// }
-			// } else {
-			// tool.mouseMove(x1, y1);
-			// tool.delay(200);
-			// tool.mousePress(InputEvent.BUTTON1_MASK);
-			// tool.delay(100);
-			// tool.mouseMove(x1 + 2 * 54, y1);
-			// tool.delay(200);
-			// tool.mouseRelease(InputEvent.BUTTON1_MASK);
-			// tool.delay(200);
-			// tool.mousePressOne(InputEvent.BUTTON1_MASK);
-			// tool.delay(1000);
-			// tool.keyPressOne(KeyEvent.VK_F);
-			// tool.delay(1000);
-			// tool.keyPressOne(KeyEvent.VK_ENTER);
-			// tool.delay(1000);
-			// }
-			// }
+			
 			// 关闭背包
 			tool.keyPressOne(KeyEvent.VK_ESCAPE);
 			tool.delay(500);
@@ -470,8 +431,8 @@ public class JGHandle {
 				JGBean bean = iterator.next();
 				if (DataSave.JGNP) {// 1347 353
 					int row = bean.getRow();
-					int linrow = (row - 1) / 8;
-					if (row > 8) {
+					int linrow = (row - 1) / 9;
+					if (row > 9) {
 						// 1254,263,1267,349, 606 128 1712 391
 						// 计算拉取深度
 						if (state != linrow) {
@@ -487,9 +448,10 @@ public class JGHandle {
 						state = 0;
 					}
 
-					int x = npcheck_point.x - 397 - 54;
-					int y = npcheck_point.y + 89;
-					tool.mouseMovePressOne((bean.getColumn() - 1) * 54 + x + 5, (bean.getRow() - 1) % 8 * 54 + y + 5,
+					int x = npcheck_point.x -426;
+					int y = npcheck_point.y + 104;
+					System.out.println(npcheck_point+" "+x+" "+y);
+					tool.mouseMovePressOne((bean.getColumn() - 1) * 50 + x + 5, (bean.getRow() - 1) % 9 * 50 + y + 5,
 							InputEvent.BUTTON3_MASK);
 
 				} else {
@@ -497,7 +459,7 @@ public class JGHandle {
 					// tool.mouseMovePressOne(x1 + (len + 2) * 54, y1,
 					// InputEvent.BUTTON3_MASK);
 					// } else
-					tool.mouseMovePressOne(x1 + len * 54, y1, InputEvent.BUTTON3_MASK);
+					tool.mouseMovePressOne(x1 + len * 50, y1, InputEvent.BUTTON3_MASK);
 				}
 				len++;
 				tool.delay(1500);
@@ -515,8 +477,9 @@ public class JGHandle {
 				return;
 			}
 			// 13 40
-			x1 = bb_xy.x - 397;
-			y1 = bb_xy.y + 131;
+			x1 = bb_xy.x - 426;
+			y1 = bb_xy.y + 146;
+			System.out.println("仓库背包第一格子"+x1+" "+y1); //970 274  x=1396,y=128]
 			if (!a) {
 				a = true;
 				// int s = 0;
@@ -529,10 +492,10 @@ public class JGHandle {
 					Iterator<JGBean> iterator = panel.getJGOtherBean().getBody().iterator();
 					while (iterator.hasNext()) {
 						JGBean bean = iterator.next();
-						int w = x1 + (bean.getColumn() - 1) * 54;
+						int w = x1 + (bean.getColumn() - 1) * 50;
 						int row = bean.getRow();
-						int linrow = (row - 1) / 8;
-						if (row > 8) {
+						int linrow = (row - 1) / 9;
+						if (row > 9) {
 							// 1254,263,1267,349, 606 128
 							// 计算拉取深度
 							if (state != linrow) {
@@ -547,7 +510,7 @@ public class JGHandle {
 							}
 							state = 0;
 						}
-						int z = y1 + ((bean.getRow() - 1) % 8) * 54;
+						int z = y1 + ((bean.getRow() - 1) % 9) * 50;
 						BufferedImage bufferedImage = tool.截取屏幕(w - 2, z - 4, w + 22, z + 4);
 						bean.setImage(bufferedImage);
 						tool.保存图片(bufferedImage, bean.getColumn() + "." + bean.getRow() + ".bmp");
@@ -649,24 +612,27 @@ public class JGHandle {
 			// DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 200,
 			// DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2, "Lin2.bmp");
 			while (model_point == null && isTrue
-					&& (model_point = GameUIModel.Findjgbb3(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+					&& (model_point = GameUIModel.Findjgbb4(tool, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
 							DataSave.SCREEN_Y + 100, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 400,
 							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 100)) == null) {
 				tool.delay(500);
+				tool.保存截屏(DataSave.SCREEN_X + DataSave.SCREEN_WIDTH / 2,
+							DataSave.SCREEN_Y + 100, DataSave.SCREEN_X + DataSave.SCREEN_WIDTH - 400,
+							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2 - 100,"jgbb4.bmp");
 			}
 			if (model_point == null)
 				return;
 			System.out.println("model_point:" + model_point);
-			// 1156 219 772 614
-			int x = model_point.x - 386;
-			int y = DataSave.服务器.equals("私服") ? model_point.y + 385 : model_point.y + 395;
-			int w = 62;
+			// 1294 211 681  269
+			int x = model_point.x - 613;
+			int y = model_point.y + 58;
+			int w = 46;
 			int h = 62;
 			String model = jgOtherPanel[number].getJGModel();
 			for (int i = 1; i <= JGOtherPanel.jgStrings.length; i++) {
 				if (JGOtherPanel.jgStrings[i - 1].equals(model)) {
-					x += (i - 1) % 7 * w;
-					y += (i - 1) / 7 * h;
+					x += (i - 1) % 13 * w;
+					y += (i - 1) / 13 * h;
 					tool.mouseMovePressOne(x, y, InputEvent.BUTTON1_MASK);
 					System.out.println("加工模式选择：model=" + model + " x=" + x + " y=" + y);
 					break;
@@ -682,10 +648,10 @@ public class JGHandle {
 			if (model_point == null)
 				return true;
 
-			if (DataSave.jg.isJGStone()) {
-				tool.mouseMovePressOne(model_point.x - 206 + 143, model_point.y + 618, InputEvent.BUTTON1_MASK);
-			} else {// 958 840 1156 219
-				tool.mouseMovePressOne(model_point.x - 206, model_point.y + 618, InputEvent.BUTTON1_MASK);
+			if (DataSave.jg.isJGStone()) {// 704 849 890 850  1294 211 
+				tool.mouseMovePressOne(model_point.x - 404, model_point.y + 639, InputEvent.BUTTON1_MASK);
+			} else {
+				tool.mouseMovePressOne(model_point.x - 590, model_point.y + 639, InputEvent.BUTTON1_MASK);
 			}
 			tool.delay(3000);
 			if (model_point == null && isTrue && (GameUIModel.FindXX2(tool, model_point.x - 20, model_point.y - 20,
