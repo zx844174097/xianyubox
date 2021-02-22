@@ -1,4 +1,4 @@
-/target/
+﻿/target/
 /PIC.dll
 /com.mugui.base.jar
 /PIC_lib/
@@ -7,5 +7,5 @@
 /料理模式/
 /data/
 /lib/
-/新钓鱼兼容steam.7z
-/完美钓鱼修复.7z
+/*.7z
+/target/
