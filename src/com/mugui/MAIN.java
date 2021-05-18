@@ -23,7 +23,6 @@ import com.mugui.model.CmdModel;
 import com.mugui.model.HsAllModel;
 import com.mugui.tool.Other;
 import com.mugui.ui.DataSave;
-import com.mugui.windows.Tool;
 
 public class MAIN {
 	protected static final String UI_MANAGER[] = null;
@@ -125,8 +124,8 @@ public class MAIN {
 		});
 
 		 init();
-		 System.setOut(outputStream); 
-		 System.setErr(outputStream);
+//		 System.setOut(outputStream); 
+//		 System.setErr(outputStream);
 		System.setOut(new PrintStream(System.out) {
 			@SuppressWarnings("deprecation")
 			@Override

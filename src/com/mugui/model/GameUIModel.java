@@ -9,7 +9,7 @@ import com.mugui.windows.Tool;
 
 public class GameUIModel {
 
-	private static Point Find(Tool tool, int x1, int y1, int x2, int y2, double d, String img) {
+	public static Point Find(Tool tool, int x1, int y1, int x2, int y2, double d, String img) {
 		return tool.区域找图EX(x1, y1, x2, y2, d, img);
 	}
 
@@ -44,7 +44,12 @@ public class GameUIModel {
 	public static Point Find料理UI(Tool tool, int x1, int y1, int x2, int y2) {
 		return Find(tool, x1, y1, x2, y2, 0.10, "UI_料理窗口.bmp");
 	}
-
+	public static Point Find背包UI(Tool tool, int x1, int y1, int x2, int y2) {
+		return Find(tool, x1, y1, x2, y2, 0.10, "UI_背包窗口.bmp");
+	}
+	public static Point Find仓库UI(Tool tool, int x1, int y1, int x2, int y2) {
+		return Find(tool, x1, y1, x2, y2, 0.10, "UI_仓库窗口.bmp");
+	}
 	private static Point BB_XY = null;
 
 	public static void startFHCK(Tool tool, int size) {

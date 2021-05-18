@@ -1,37 +1,35 @@
 package com.mugui.ui.part;
 
-import com.mugui.Dui.DPanel;
-import com.mugui.http.Bean.JGOtherBean.JGBean;
-import com.mugui.model.LjHandle;
-import com.mugui.tool.Other;
-import com.mugui.ui.DataSave;
-import com.mugui.windows.Tool;
-
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
-
-import com.melloware.jintellitype.HotkeyListener;
-import com.melloware.jintellitype.JIntellitype;
-import com.mugui.Dui.DButton;
 import java.awt.Color;
 import java.awt.Dimension;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.util.Iterator;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import com.mugui.Dui.DTextField;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
+import com.melloware.jintellitype.HotkeyListener;
+import com.melloware.jintellitype.JIntellitype;
+import com.mugui.Dui.DButton;
+import com.mugui.Dui.DPanel;
+import com.mugui.Dui.DTextField;
 import com.mugui.Dui.DVerticalFlowLayout;
+import com.mugui.http.Bean.JGOtherBean.JGBean;
+import com.mugui.model.LjHandle;
+import com.mugui.tool.Other;
+import com.mugui.ui.DataSave;
+import com.mugui.windows.Tool;
 
 public class LJ extends DPanel {
 	public LJ() {
@@ -341,7 +339,7 @@ public class LJ extends DPanel {
 			}
 			while (bean.hasNext()) {
 				JGBean bean2 = bean.next();
-				if (bean2.getColumn() <= 0 || bean2.getRow() <= 0 || bean2.getColumn() > 8 || bean2.getRow() > 24) {
+				if (bean2.getColumn() <= 0 || bean2.getRow() <= 0 || bean2.getColumn() > 9 || bean2.getRow() > 24) {
 					JOptionPane.showMessageDialog(DataSave.StaticUI, "编号:" + panel.getNumber() + "参数超过限制，无法开始炼金", "警告", JOptionPane.OK_OPTION);
 					return false;
 				}
