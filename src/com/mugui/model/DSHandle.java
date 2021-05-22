@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 
 import org.eclipse.swt.internal.win32.OS;
 
-import net.sourceforge.tess4j.Tesseract2;
-
 import com.mugui.MAIN;
 import com.mugui.Dui.DimgFile;
 import com.mugui.MP3.decoder.JavaLayerException;
@@ -32,6 +30,8 @@ import com.mugui.ui.part.DSThreadPanel;
 import com.mugui.ui.part.GameListenerThread;
 import com.mugui.windows.Clipboard;
 import com.mugui.windows.Tool;
+
+import net.sourceforge.tess4j.Tesseract2;
 
 public class DSHandle {
 	private static boolean isTrue = false;
@@ -2135,13 +2135,13 @@ public class DSHandle {
 		if (d <= 0)
 			d = 0;
 
-		Point point = GameUIModel.FindXX(shouTool, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 100, 80 + DataSave.SCREEN_Y,
+		Point point = GameUIModel.Find背包UI(shouTool, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X - 500, 80 + DataSave.SCREEN_Y,
 				DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT / 2);
 		if (point == null) {
 			return false;
 		}
 
-		Point p = shouTool.区域找图(point.x - 500, point.y, point.x + 12, point.y + 700, d, "坏鱼竿.bmp");
+		Point p = shouTool.区域找图(point.x , point.y, DataSave.SCREEN_WIDTH + DataSave.SCREEN_X, point.y + 700, d, "坏鱼竿.bmp");
 		if (p != null) {
 			shouTool.delay(200);
 			shouTool.mouseMove(p.x, p.y);
@@ -2149,7 +2149,7 @@ public class DSHandle {
 			shouTool.mousePress(InputEvent.BUTTON1_MASK);
 			shouTool.delay(200);
 			// 1865,783
-			shouTool.mouseMove(point.x, point.y + 638);
+			shouTool.mouseMove(point.x+369, point.y + 624);//1466 159 1835 783 
 			shouTool.delay(200);
 			shouTool.mouseRelease(InputEvent.BUTTON1_MASK);
 			shouTool.delay(200);
