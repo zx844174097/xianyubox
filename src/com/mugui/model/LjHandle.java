@@ -410,7 +410,7 @@ public class LjHandle {
 
 			long time = System.currentTimeMillis();
 			qieh1 = false;
-			while (isTrue && tool.区域找图EX(DataSave.SCREEN_X, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT ,
+			while (isTrue && tool.区域找图EX(DataSave.SCREEN_X, DataSave.SCREEN_Y ,
 					DataSave.SCREEN_X + DataSave.SCREEN_WIDTH, DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT, 0.25,
 					"操作.bmp") == null) {
 				// 检测炼金是否开始832, 865
