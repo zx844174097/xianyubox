@@ -257,9 +257,9 @@ public class LjHandle {
 				tool.delay(500);
 				tool.mouseMovePressOne(pp1.x, pp1.y + j * 143, InputEvent.BUTTON1_MASK);
 				tool.delay(500);
-				BufferedImage image = tool.截取屏幕(cangku.x - 458, cangku.y + 68, cangku.x + 10, cangku.y + 479 + 68);
+				BufferedImage image = tool.截取屏幕(cangku.x  , cangku.y + 68, cangku.x + 458, cangku.y + 479 + 68);
 				for (cook_i = 0; cook_i < taizi.length; cook_i++) {
-					Point point = tool.图中找图(image, taizi[cook_i], 0.12, cangku.x - 458, cangku.y + 68);
+					Point point = tool.图中找图(image, taizi[cook_i], 0.12, cangku.x , cangku.y + 68);
 					if (point != null) {
 						return point;
 					}
