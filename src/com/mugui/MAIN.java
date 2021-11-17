@@ -27,7 +27,7 @@ import com.mugui.ui.DataSave;
 public class MAIN {
 	protected static final String UI_MANAGER[] = null;
 
-	private static  String JARFILEPATH = null;
+	private static String JARFILEPATH = null;
 	static {
 		System.setProperty("sun.jnu.encoding", "utf-8");
 		JARFILEPATH = MAIN.class.getProtectionDomain().getCodeSource().getLocation().getFile();
@@ -38,7 +38,8 @@ public class MAIN {
 		}
 		ClassLoader classLoader = (ClassLoader) ClassLoader.getSystemClassLoader();
 		try {
-			InputStreamReader input = new InputStreamReader(classLoader.getResourceAsStream("com/mugui/updatafile/updata.list"));
+			InputStreamReader input = new InputStreamReader(
+					classLoader.getResourceAsStream("com/mugui/updatafile/updata.list"));
 			BufferedReader reader = new BufferedReader(input);
 			String str = "";
 			while ((str = reader.readLine()) != null) {
@@ -123,9 +124,9 @@ public class MAIN {
 			}
 		});
 
-		 init();
-//		 System.setOut(outputStream); 
-//		 System.setErr(outputStream);
+		init();
+		System.setOut(outputStream);
+		System.setErr(outputStream);
 		System.setOut(new PrintStream(System.out) {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -156,17 +157,27 @@ public class MAIN {
 		save.init();
 		save.start();
 		System.getProperties().put("DataSave", save);
-
+		System.out.println("桌面：" + DataSave.SCREEN_X + " " + DataSave.SCREEN_Y + " " + DataSave.SCREEN_WIDTH + " "
+				+ DataSave.SCREEN_HEIGHT);
 //		Tool shouTool = new Tool();
 //
 //		BufferedImage bufferedImage;
 //		try {
-//			bufferedImage = shouTool.getDImg("1580942722150_识别区.bmp").bufferedImage;
+//			bufferedImage = shouTool.getDImg("QQ图片20211002054820.bmp").bufferedImage;
+//		BufferedImage cutImage = ImgTool.cutImage(bufferedImage, 1920 / 2 - 300 + 0, 100 +0,
+//					1920/ 2 - 50 + 0-(1920/ 2 - 300 + 0),
+//					1080 / 2 + 500 +0-(100 +0));
+//		Point 图中找图ex = shouTool.图中找图EX(cutImage,  "新验证码时间条.bmp", 0.05, 1920 / 2 - 300 + 0, 100 +0);
+//		System.out.println(图中找图ex);
+//			Point p = shouTool.区域找图EX(1920/ 2 - 300 + 0, 100 +0,
+//					1920/ 2 - 50 + 0,
+//					DataSave.SCREEN_HEIGHT / 2 + 500 +0, 0.05, "新验证码时间条.bmp");
 //			shouTool.chuli(bufferedImage);
-//		} catch (IOException e) { 
+//		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+
 	}
 
 	public static BufferedImage image = null;
@@ -181,7 +192,9 @@ public class MAIN {
 				synchronized (object) {
 					if (!bool) {
 						bool = true;
-						outputStream = new PrintStream(new FileOutputStream(new File(DataSave.JARFILEPATH + "/log/log_" + System.currentTimeMillis() + ".txt")),
+						outputStream = new PrintStream(
+								new FileOutputStream(new File(
+										DataSave.JARFILEPATH + "/log/log_" + System.currentTimeMillis() + ".txt")),
 								true, "utf-8");
 					}
 				}

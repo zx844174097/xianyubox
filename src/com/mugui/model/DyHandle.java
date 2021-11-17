@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 import com.mugui.http.Bean.UserBean;
 import com.mugui.http.pack.TcpBag;
 import com.mugui.tool.ImgTool;
@@ -602,9 +603,10 @@ public class DyHandle {
 
 		private boolean dyProfect() {
 			int w = DataSave.SCREEN_WIDTH / 2;
-			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")||DataSave.服务器.equals("私服")) {
+			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")
+					|| DataSave.服务器.equals("私服")) {
 				if (shouTool.区域找色(w - 124 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 - 93 + DataSave.SCREEN_Y,
-						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 200+ DataSave.SCREEN_Y, 0.1, 50,
+						w + 90 + DataSave.SCREEN_X, DataSave.SCREEN_HEIGHT / 2 + 200 + DataSave.SCREEN_Y, 0.1, 50,
 						"23B7EB") != null) {
 					return true;
 				}
@@ -723,7 +725,7 @@ public class DyHandle {
 			if (point == null)
 				return;
 			System.out.println("yuPanduan:" + point);// 1461 554 1752 511 1780 614
-			int w = point.x - (1752 - 1461)-5;
+			int w = point.x - (1752 - 1461) - 5;
 			int h = point.y + (554 - 511);
 			int w2 = point.x + (1780 - 1752);
 			int h2 = h + 10;
@@ -876,8 +878,9 @@ public class DyHandle {
 			// 0.5) {
 			// return false;
 			// }
-			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")||DataSave.服务器.equals("私服")) {// 766 398 789
-																											// 417
+			if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")
+					|| DataSave.服务器.equals("私服")) {// 766 398 789
+				// 417
 				return shouTool.paint(p.x + 3, p.y - 25, p.x + 370, p.y - 12);
 			}
 			return shouTool.paint(p.x - 50, p.y - 40, p.x + 300, p.y - 30);
@@ -893,9 +896,13 @@ public class DyHandle {
 			while (isTrue && System.currentTimeMillis() - time < 1000 * 5) {
 				// while (isTrue && i != 0 || i == -1) {
 				Point p = null;
-				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")||DataSave.服务器.equals("私服")) {// 766 398
-																												// 789
-																												// 417
+				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")
+						|| DataSave.服务器.equals("私服")) {// 766 398
+					// 789
+					// 417
+					shouTool.保存截屏(DataSave.SCREEN_WIDTH / 2 - 300 + DataSave.SCREEN_X, 100 + DataSave.SCREEN_Y,
+							DataSave.SCREEN_WIDTH / 2 - 50 + DataSave.SCREEN_X,
+							DataSave.SCREEN_HEIGHT / 2 + 500 + DataSave.SCREEN_Y, "验证条识别区域.bmp");
 					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 300 + DataSave.SCREEN_X, 100 + DataSave.SCREEN_Y,
 							DataSave.SCREEN_WIDTH / 2 - 50 + DataSave.SCREEN_X,
 							DataSave.SCREEN_HEIGHT / 2 + 500 + DataSave.SCREEN_Y, d + 0.05, "新验证码时间条.bmp");
@@ -937,11 +944,12 @@ public class DyHandle {
 					Point p = null;// C28F4E
 					Point point = null;
 					while (isTrue && System.currentTimeMillis() - time < 5000 && !isSpace) {
-						if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")||DataSave.服务器.equals("私服")) {// 100
-																														// 90
-																														// 831
-																														// 372
-																														// 0.96875
+						if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")
+								|| DataSave.服务器.equals("私服")) {// 100
+							// 90
+							// 831
+							// 372
+							// 0.96875
 							if (point == null) {
 								point = tool.区域找图EX(DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 37,
 										DataSave.SCREEN_Y + 100, DataSave.SCREEN_WIDTH / 2 + DataSave.SCREEN_X + 58,
@@ -1013,9 +1021,10 @@ public class DyHandle {
 			int w = (int) (DataSave.SCREEN_WIDTH - 141) / 2 + DataSave.SCREEN_X;
 			int h = 147 + DataSave.SCREEN_Y;
 			Point p = null;
-			
+
 			while (isTrue && i != 0 || i == -1) {
-				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")||DataSave.服务器.equals("私服")) {
+				if (DataSave.服务器.equals("台服") || DataSave.服务器.equals("韩服") || DataSave.服务器.equals("steam服")
+						|| DataSave.服务器.equals("私服")) {
 					p = shouTool.区域找图EX(DataSave.SCREEN_WIDTH / 2 - 100 + DataSave.SCREEN_X, 50 + DataSave.SCREEN_Y,
 							DataSave.SCREEN_WIDTH / 2 + 100 + DataSave.SCREEN_X,
 							DataSave.SCREEN_Y + DataSave.SCREEN_HEIGHT - 100, 0.15, "space.bmp");

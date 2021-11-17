@@ -54,7 +54,7 @@ public class ImgTool {
 			try {
 				throw new Exception(img.getWidth() + " " + img.getHeight() + " " + x + " " + y + " " + w + " " + h);
 			} catch (Exception e1) {
-				// e1.printStackTrace();
+				 e1.printStackTrace();
 			}
 			return null;
 		}
