@@ -51,6 +51,17 @@
 			<parameters>[0, 0, 3]</parameters>
 		</鼠标移动并单击1次>
 	</鼠标函数>
+	<鼠标函数增强>
+		<explanation>里面有非常好用的[name]</explanation>
+		<鼠标位于某范围时按下某键>
+			<class_name>com.mugui.script.FunctionExUtil</class_name>
+			<function>鼠标位于某范围触发按键</function>
+			<explanation>鼠标位于某范围时按下某键，离开时释放某键 &lt;br&gt;
+				&lt;br&gt;&lt;br&gt;参数1: 区域左上角x&lt;br&gt;参数2: 区域左上角y&lt;br&gt;参数3: 区域右下角x&lt;br&gt;参数4:  区域右下角y&lt;br&gt;参数5:  按键
+			</explanation>
+			<parameters>[0,0,0,0,2]</parameters>
+		</鼠标位于某范围时按下某键>
+	</鼠标函数增强>
 	<键盘函数>
 		<explanation>里面有非常好用的[name]</explanation>
 		<按下某个键>

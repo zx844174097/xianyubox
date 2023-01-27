@@ -13,10 +13,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JPanel;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.util.JSONTokener;
-
 import com.mugui.DataSaveInterface;
 import com.mugui.MAIN;
 import com.mugui.ModelInterface;
@@ -36,6 +32,10 @@ import com.mugui.ui.df.FishPriceFrame;
 import com.mugui.ui.df.HsInitPanel;
 import com.mugui.ui.part.GameListenerThread;
 import com.mugui.windows.GameBackstageTool;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.util.JSONTokener;
 
 public class HsAllModel {
 	public static void sendFishLineFeature(byte[] body, int index) {
@@ -147,12 +147,17 @@ public class HsAllModel {
 
 	public static void login(final InfoBean infoBean) {
 		final UserBean userBag = new UserBean((JSONObject) infoBean.getBody());
+		if("error_login".equals(infoBean.getType())) {
+			new TimeInfo("错误", infoBean.getMessage(), 1500).run(HsInitPanel.main);
+			Other.sleep(1600);
+			return ;
+		}
 		DataSave.userBean = userBag;
 		if (DataSave.login.isZhanghao())
 			DataSave.login.saveZhanghao(userBag.getUser_mail());
 		UserBean.CODE = userBag.getUser_mac();
 		DataSave.StaticUI.setVisible(true);
-		if (infoBean.getType().equals("success_login_no")) {
+		if ( "success_login_no".equals(infoBean.getType())) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {

@@ -155,7 +155,7 @@ public class JGHandle {
 					if (DataSave.服务器.equals("私服")) {
 						tool.mouseMovePressOne(bb_xy.x - 134 - 180, bb_xy.y + 565, InputEvent.BUTTON1_MASK);
 					} else {// 1311 890 1409 168
-						tool.mouseMovePressOne(bb_xy.x - 98, bb_xy.y + 782, InputEvent.BUTTON1_MASK);
+						tool.mouseMovePressOne(bb_xy.x - 98-50, bb_xy.y + 782, InputEvent.BUTTON1_MASK);
 					}
 					tool.delay(2000);
 				} else {

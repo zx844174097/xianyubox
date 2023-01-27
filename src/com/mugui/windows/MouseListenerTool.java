@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.mugui.model.HsAllModel;
+import com.mugui.script.ScriptBean;
+import com.mugui.script.ScriptThread;
 import com.mugui.ui.DataSave;
 import com.sun.jna.Structure;
 import com.sun.jna.examples.win32.Kernel32;
@@ -121,16 +123,28 @@ public class MouseListenerTool implements Runnable {
 		 * @param scanCode
 		 *            扫描码，若传递虚拟键值码，请使用OS.MapVirtualKey(keyCode,0) 翻译成扫描码
 		 */
-		public KeyListener(Object object, int i) {
+		public KeyListener(Object object, int scanCode) {
 			this.object = object;
-			key = i;
+			key = scanCode;
 		}
 
 		public boolean isCheckNull() {
 			return object == null;
 		}
 
+		/**
+		 * 按下
+		 * @param object
+		 */
 		public abstract void callback(Object object);
+
+		/**
+		 * 释放
+		 * @param object
+		 */
+		public  void callRelease(Object object){
+
+		}
 	}
 
 	public void run() {
@@ -145,7 +159,7 @@ public class MouseListenerTool implements Runnable {
 					DataSave.StaticUI.setAlwaysOnTop(true);
 					DataSave.StaticUI.setAlwaysOnTop(false);
 				}
-
+				//按下
 				if ((IParm.flags & (1 << 7)) == 0) {
 					if (hashMap != null) {
 						ConcurrentHashMap<Integer, KeyListener> map = null;
@@ -156,6 +170,23 @@ public class MouseListenerTool implements Runnable {
 								Collection<KeyListener> collections = map.values();
 								for (KeyListener listener : collections) {
 									listener.callback(listener.object);
+								}
+							}
+
+						}
+					}
+				}
+				//释放
+				else if ((IParm.flags & (1 << 7)) ==128) {
+					if (hashMap != null) {
+						ConcurrentHashMap<Integer, KeyListener> map = null;
+						if ((map = hashMap.get(IParm.scanCode)) != null) {
+							if (map.isEmpty()) {
+								hashMap.remove(IParm.scanCode);
+							} else {
+								Collection<KeyListener> collections = map.values();
+								for (KeyListener listener : collections) {
+									listener.callRelease(listener.object);
 								}
 							}
 

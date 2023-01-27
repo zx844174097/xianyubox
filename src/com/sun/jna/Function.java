@@ -113,7 +113,6 @@ public class Function extends Pointer {
             this.peer = library.getSymbolAddress(functionName);
         }
         catch(UnsatisfiedLinkError e) {
-        	e.printStackTrace();
             throw new UnsatisfiedLinkError("Error looking up function '" 
                                            + functionName + "': " 
                                            + e.getMessage());
