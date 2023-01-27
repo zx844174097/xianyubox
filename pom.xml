@@ -8,7 +8,20 @@
 	<build>
 
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.bmp</include>
+					<include>**/*.jar</include>
+					<include>**/*.list</include>
+					<include>**/*.xml</include>
+					<include>**/*.dll</include>
+					<include>**/*.json</include>
+				</includes>
+			</resource>
 
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -52,8 +65,6 @@
 			<artifactId>snappy-java</artifactId>
 			<version>1.1.7.3</version>
 		</dependency>
-
-
 	</dependencies>
 
 </project>

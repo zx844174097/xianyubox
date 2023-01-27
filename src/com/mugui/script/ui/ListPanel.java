@@ -10,11 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.io.File;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
+import com.mugui.script.ScriptThread;
 import org.eclipse.swt.internal.win32.OS;
 
 import com.mugui.MAIN;
@@ -123,6 +121,7 @@ public class ListPanel extends DPanel {
 						MouseListenerTool.newInstance().removeKeyListeners(panel.bean.keyListener);
 					}
 				}
+				ScriptBean.stopAll();
 			}
 		});
 
@@ -190,6 +189,18 @@ public class ListPanel extends DPanel {
 			checkBox.setPreferredSize(new Dimension(100, 15));
 			setLayout(new FlowLayout());
 			add(checkBox);
+			JRadioButton longPressToStart = new JRadioButton("长按启动");
+			longPressToStart.addActionListener(e->{
+				if (longPressToStart.isSelected()) {
+					this.bean.startupType=ScriptBean.KEY_KEEP_START;
+				} else {
+					this.bean.startupType=ScriptBean.KEY_START_SHUTDOWN;
+				}
+			});
+
+			longPressToStart.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+			add(longPressToStart);
+
 			JLabel label = new JLabel("热键：");
 			label.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			add(label);
@@ -210,6 +221,8 @@ public class ListPanel extends DPanel {
 				}
 			});
 			add(field);
+
+
 			DButton updata = new DButton("编辑", null);
 			updata.setFont(new Font("Dialog", Font.PLAIN, 12));
 			updata.addActionListener(new ActionListener() {

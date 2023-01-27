@@ -896,4 +896,6 @@ public class Tool {
 		Color c1 = robot.getPixelColor(x, y);
 		return getColorInHexFromRGB(c1.getRed(), c1.getGreen(), c1.getBlue());
 	}
+
+
 }

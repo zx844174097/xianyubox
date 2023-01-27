@@ -8,3 +8,6 @@
 /data/
 /*.7z
 /target/
+/mugui.iml
+.idea
+.classpath

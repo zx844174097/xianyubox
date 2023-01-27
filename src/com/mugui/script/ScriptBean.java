@@ -8,6 +8,9 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.Charset;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JOptionPane;
 
@@ -23,14 +26,32 @@ public class ScriptBean {
 	public String name;
 	public String code;
 	public String hot_key;
+
+	/**
+	 * 按键启动 按键关闭
+	 */
+	public static final int KEY_START_SHUTDOWN=0;
+
+	/**
+	 * 按住键盘启动 松开关闭
+	 */
+	public static final int KEY_KEEP_START=1;
+
+	public int startupType=KEY_START_SHUTDOWN;
+
 	public KeyListener keyListener = null;
 	public byte[] body;
 	public File file;
 
 	public ScriptBean(String name, String code, String hot_key) {
+		this(name,code,hot_key,KEY_START_SHUTDOWN);
+	}
+
+	public ScriptBean(String name, String code, String hot_key,int startupType) {
 		this.code = code;
 		this.name = name;
 		this.hot_key = hot_key;
+		this.startupType=startupType;
 		keyListener = new KeyListener(this, OS.MapVirtualKey(Tool.getkeyCode(hot_key), 0)) {
 			/**
 			 * 启动脚本
@@ -39,8 +60,19 @@ public class ScriptBean {
 			public void callback(Object object) {
 				ScriptBean.startScript((ScriptBean) object);
 			}
+
+			/**
+			 * 停止脚本
+			 * @param object
+			 */
+			@Override
+			public void callRelease(Object object) {
+				ScriptBean.stopScript((ScriptBean) object);
+			}
+
 		};
 	}
+
 
 	public void setHotKey(String text) {
 		hot_key = text;
@@ -155,11 +187,47 @@ public class ScriptBean {
 		file.delete();
 	}
 
+	private static final ConcurrentHashMap<String,ScriptThread> scriptThreads = new ConcurrentHashMap<>();
+
 	protected static void startScript(ScriptBean object) {
 		if (object.body == null)
 			return;
-		ScriptThread thread = new ScriptThread(object);
-		thread.start();
+		 ScriptThread scriptThread=scriptThreads.get(object.code);
+ 		 if(scriptThread==null||!scriptThread.isAlive()){
+			 synchronized (scriptThreads){
+				 scriptThread=scriptThreads.get(object.code);
+				 if(scriptThread==null||!scriptThread.isAlive()){
+					 ScriptThread thread = new ScriptThread(object);
+					 thread.setControllableStop(false);
+					 scriptThreads.put(object.code, thread);
+					 System.out.println("启动脚本"+object.toString());
+					 thread.start();
+				 }
+			 }
+		 }else if(scriptThread.isControllableStop()&&object.startupType==ScriptBean.KEY_START_SHUTDOWN){
+			 scriptThread.Stop();
+			 scriptThreads.remove(object.code);
+		 }
+	}
+
+	private static void stopScript(ScriptBean object) {
+		ScriptThread scriptThread= scriptThreads.get(object.code);
+		if(scriptThread!=null&&object.startupType==ScriptBean.KEY_KEEP_START){
+			scriptThread.Stop();
+			scriptThreads.remove(object.code);
+		}else {
+			if(scriptThread!=null){
+				scriptThread.setControllableStop(true);
+			}
+		}
+	}
+	public static void stopAll() {
+		Iterator<Map.Entry<String, ScriptThread>> iterator = scriptThreads.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry<String, ScriptThread> next = iterator.next();
+			next.getValue().Stop();
+			iterator.remove();
+		}
 	}
 
 }

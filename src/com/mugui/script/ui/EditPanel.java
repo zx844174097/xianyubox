@@ -9,8 +9,17 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.nio.charset.Charset;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import com.mugui.Dui.DButton;
 import com.mugui.Dui.DPanel;
 import com.mugui.Dui.DScrollBar;
@@ -18,14 +27,7 @@ import com.mugui.Dui.DTextArea;
 import com.mugui.script.DataSave;
 import com.mugui.script.FunctionBean;
 import com.mugui.script.ScriptBean;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import com.mugui.script.other.CsGoScript;
 
 public class EditPanel extends DPanel {
 	public EditPanel() {
@@ -33,6 +35,10 @@ public class EditPanel extends DPanel {
 
 		JPanel panel_5 = new JPanel();
 		this.add(panel_5, BorderLayout.NORTH);
+
+		final DButton csgoButton = new DButton("开启连跳", (Color) null);
+		csgoButton.addActionListener(CsGoScript::handle);
+		panel_5.add(csgoButton);
 
 		final DButton button_1 = new DButton("源码", (Color) null);
 
@@ -112,12 +118,19 @@ public class EditPanel extends DPanel {
 				lblNewLabel.setText("<html>" + string + "</html>");
 			}
 		});
+		JScrollPane scrollPane_2 = new JScrollPane();
 		functionTree.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				editpanel.add(functionTree.now_functionbean);
+				scrollPane_2.validate();
+				scrollPane_2.repaint();
 			}
 		});
+		
+
+		
+		
 		JPanel panel_1 = new JPanel();
 		GroupLayout gl_viewPanel = new GroupLayout(viewPanel);
 		gl_viewPanel.setHorizontalGroup(
@@ -125,16 +138,18 @@ public class EditPanel extends DPanel {
 				.addGroup(gl_viewPanel.createSequentialGroup()
 					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(editpanel, GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+					.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_viewPanel.setVerticalGroup(
 			gl_viewPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-				.addComponent(editpanel, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+				.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
 				.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
 		);
+		scrollPane_2.setViewportView(editpanel);
+//		editpanel.add(scrollPane_2);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
