@@ -152,10 +152,10 @@ public class DRobot extends Robot {
 	@Override
 	public synchronized void delay(int ms) {
 		Init();
-		if (DataSave.兼容) {
+//		if (DataSave.兼容) {
 			Other.sleep(ms);
-		} else
-			super.delay(ms);
+//		} else
+//			super.delay(ms);
 	}
 
 	public interface DD extends Library {

@@ -302,9 +302,16 @@ public class Tool {
 		delay(200);
 		mousePressOne(button);
 	}
-
+	private boolean isDelay=false;
 	public void delay(int i) {
-		robot.delay(i);
+		isDelay=true;
+		long time=System.currentTimeMillis();
+		while(isDelay&&System.currentTimeMillis()-time<i){
+			robot.delay(1);
+		}
+	}
+	public void delayStop(){
+		isDelay=false;
 	}
 
 	public void mousePressOne(int button1) {

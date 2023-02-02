@@ -127,9 +127,10 @@ public class ScriptThread extends Thread {
     static Tool tool = new Tool();
 
     public void Stop() {
-        System.out.println("dd脚本停止"+bean.hot_key+bean.startupType+bean.name);
+        System.out.println("dd脚本停止"+bean.code+bean.startupType+bean.name);
         isRun = false;
         while (this.isAlive()) {
+            tool.delayStop();
             Other.sleep(1);
         }
         for (Map.Entry<Integer, Integer> objectObjectEntry : pressKeys.entrySet()) {

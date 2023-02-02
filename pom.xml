@@ -18,6 +18,7 @@
 					<include>**/*.xml</include>
 					<include>**/*.dll</include>
 					<include>**/*.json</include>
+					<include>**/*.data</include>
 				</includes>
 			</resource>
 
