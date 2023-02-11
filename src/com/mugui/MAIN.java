@@ -38,11 +38,13 @@ public class MAIN {
 		}
 		ClassLoader classLoader = (ClassLoader) ClassLoader.getSystemClassLoader();
 		try {
+			URL resource = classLoader.getResource("com/mugui/updatafile/updata.list");
+			System.out.println(resource);
 			InputStreamReader input = new InputStreamReader(
 					classLoader.getResourceAsStream("com/mugui/updatafile/updata.list"));
 			BufferedReader reader = new BufferedReader(input);
 			String str = "";
-			while ((str = reader.readLine()) != null) {
+			while ((str = reader.readLine()) != null)  {
 				String line[] = str.split("=");
 				if (line.length != 2) {
 					continue;
