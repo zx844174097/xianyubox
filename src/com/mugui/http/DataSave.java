@@ -5,12 +5,12 @@ import com.mugui.http.pack.TcpBag;
 import com.mugui.model.TCPModel;
 
 public class DataSave {
-	public static int dyTime = 0;
-	public static int qpTime = 0;
-	public static int dsTime = 0;
-	public static int jgTime = 0;
-	public static int myTime = 0;
-	public static int ljTime = 0;
+	public static int dyTime = 20230118;
+	public static int qpTime = 20230118;
+	public static int dsTime = 20230118;
+	public static int jgTime = 20230118;
+	public static int myTime = 20230118;
+	public static int ljTime = 20230118;
 	private static Thread out_time_limit = null;
 	private static boolean isTrue = false;
 

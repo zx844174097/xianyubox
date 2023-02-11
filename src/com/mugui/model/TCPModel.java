@@ -35,11 +35,13 @@ public class TCPModel {
 	static int a = 0;
 
 	public static void sendByteArray(TcpBag bag) {
-		send(bag, false);
+		//关闭网络请求
+//		send(bag, false);
 	}
 
 	public static void SendTcpBag(TcpBag bag) {
-		send(bag, true);
+		//关闭网络请求
+//		send(bag, true);
 
 	}
 

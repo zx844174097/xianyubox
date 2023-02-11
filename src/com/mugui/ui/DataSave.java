@@ -22,6 +22,7 @@ import com.mugui.model.ModelManagerInterface;
 import com.mugui.model.TCPModel;
 import com.mugui.model.UIModel;
 import com.mugui.ui.df.FishPriceFrame;
+import com.mugui.ui.df.HsInitPanel;
 import com.mugui.ui.part.BodyPanel;
 import com.mugui.ui.part.CJ;
 import com.mugui.ui.part.DS;
@@ -288,7 +289,11 @@ public class DataSave implements com.mugui.DataSaveInterface {
 				f.delete();
 			}
 		StaticUI.setVisible(true);
-		UIModel.setUI(login);
+
+		//绕过登录
+//		UIModel.setUI(login);
+		UIModel.setUI(HsInitPanel.main);
+
 		// 发送一个版本检测包
 		TCPModel.selectNewApp();
 		return null;

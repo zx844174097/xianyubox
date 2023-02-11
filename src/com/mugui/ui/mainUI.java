@@ -157,7 +157,7 @@ public class mainUI extends DFrame {
 		user_name.setHorizontalAlignment(SwingConstants.LEFT);
 		user_name.setFont(new Font("宋体", Font.BOLD, 12));
 
-		label_1 = new JLabel("剩余使用天数："); 
+		label_1 = new JLabel("剩余使用天数：20230118");
 		panel_1.add(label_1); 
 		label_1.setBackground(null);
 		label_2 = new JLabel("版本号：5.0_3.65_3.1_2.3_1.1_0.03_v6.0");
@@ -187,11 +187,12 @@ public class mainUI extends DFrame {
 	}
 
 	public void setTime(int time) {
-		if (time <= 999)
-			setTime("剩余使用天数：" + time);
-		else {
-			setTime("永久不限时");
-		}
+		setTime("剩余使用天数：" + 20230118);
+//		if (time <= 999)
+//			setTime("剩余使用天数：" + time);
+//		else {
+//			setTime("永久不限时");
+//		}
 	}
 
 	public void setTime(String time) {
