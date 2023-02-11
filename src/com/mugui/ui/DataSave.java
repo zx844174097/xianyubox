@@ -25,7 +25,10 @@ import com.mugui.ui.df.FishPriceFrame;
 import com.mugui.ui.df.HsInitPanel;
 import com.mugui.ui.part.BodyPanel;
 import com.mugui.ui.part.CJ;
+import com.mugui.ui.part.CJ.HS_MAP;
+import com.mugui.ui.part.Custon;
 import com.mugui.ui.part.DS;
+import com.mugui.ui.part.DY;
 import com.mugui.ui.part.DownloadList;
 import com.mugui.ui.part.EW;
 import com.mugui.ui.part.JG;
@@ -34,11 +37,8 @@ import com.mugui.ui.part.MY;
 import com.mugui.ui.part.WebBrowrer2;
 import com.mugui.ui.part.admin;
 import com.mugui.ui.part.debug;
-import com.mugui.ui.part.DY;
-import com.mugui.ui.part.Custon;
 import com.mugui.ui.part.qp;
 import com.mugui.ui.part.qpList;
-import com.mugui.ui.part.CJ.HS_MAP;
 import com.mugui.windows.呼吸背景;
 
 public class DataSave implements com.mugui.DataSaveInterface {
@@ -52,7 +52,20 @@ public class DataSave implements com.mugui.DataSaveInterface {
 	public static mainUI StaticUI = null;
 	public static admin login = null;
 	public static debug deBug = null;
-	public static UserBean userBean = null;
+	public static UserBean userBean = new UserBean();
+	static {
+		userBean.setUser_name("时间被停摆的白菜");
+		userBean.setUser_mail("747058102@qq.com");
+		userBean.setUser_host("256.256.256.256");
+		userBean.setUser_passwd("20230118");
+		userBean.setUser_post("0118");
+		userBean.setUser_mac("love you");
+		userBean.setUser_id("-1");
+		userBean.setUser_pc_name("白菜");
+		userBean.setUser_pc_win("白菜 win");
+		userBean.setUser_snake_mark("666666");
+		userBean.setUser_sequence("i");
+	}
 	public static TcpSocketUserBean tcpSocket = null;
 	public static DY dy = null;
 	public static qp qp = null;
