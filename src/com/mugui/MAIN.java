@@ -70,7 +70,7 @@ public class MAIN {
 			addUrl.setAccessible(true);
 			System.out.println(new File(JARFILEPATH + "\\lib\\").getAbsolutePath());
 			File[] files = new File(JARFILEPATH + "\\lib\\").listFiles();
-			for (File file : files) {
+			for (File file : files) { 
 				// String end =
 				// file.getName().substring(file.getName().lastIndexOf(".") +
 				// 1);

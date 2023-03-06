@@ -11,3 +11,4 @@
 /mugui.iml
 .idea
 .classpath
+/dependency-reduced-pom.xml
